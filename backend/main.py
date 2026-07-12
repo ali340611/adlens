@@ -10,8 +10,12 @@ from pydantic import BaseModel, Field
 
 load_dotenv()
 
+
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4.1-mini")
+OPENAI_MODEL = os.getenv(
+    "OPENAI_MODEL",
+    "gpt-4.1-mini"
+)
 
 
 app = FastAPI(
@@ -25,7 +29,6 @@ ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "https://adlens-six.vercel.app",
-    "https://adlens-nj930s729-ad-lens1.vercel.app",
 ]
 
 
@@ -37,6 +40,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 
 def get_client():
@@ -54,9 +58,10 @@ def get_client():
     )
 
 
-# =========================
+
+# =====================
 # STRATEGY MODELS
-# =========================
+# =====================
 
 
 class StrategyRequest(BaseModel):
@@ -81,6 +86,7 @@ class StrategyRequest(BaseModel):
         "awareness",
         "leads"
     ]
+
 
 
 class ExpectedResults(BaseModel):
@@ -151,9 +157,9 @@ class StrategyResponse(BaseModel):
 
 
 
-# =========================
+# =====================
 # ANALYSIS MODELS
-# =========================
+# =====================
 
 
 class AnalyzeRequest(BaseModel):
@@ -180,12 +186,9 @@ class AnalyzeResponse(BaseModel):
     weaknesses: list[str]
 
     suggestions: list[str]
-
-
-
-# =========================
-# BASIC
-# =========================
+    # =====================
+# BASIC ENDPOINTS
+# =====================
 
 
 @app.get("/")
@@ -208,9 +211,11 @@ def health():
     }
 
 
-# =========================
-# STRATEGY
-# =========================
+
+
+# =====================
+# STRATEGY ENDPOINT
+# =====================
 
 
 @app.post(
@@ -230,97 +235,124 @@ def create_strategy(
 
             model=OPENAI_MODEL,
 
+
             input=[
 
-                {
-                    "role":"system",
 
-                    "content":"""
+                {
+                    "role": "system",
+
+                    "content": """
 
 You are AdLens AI,
-a senior advertising strategist.
+a senior global advertising strategist.
 
-Create a realistic marketing plan.
+Create a realistic advertising strategy.
 
 Return:
 
-- score 0-100
+- score between 0 and 100
 - performance level
-- summary
-- expected CTR
-- expected conversions
-- expected CPA
-- 3-5 channels
+- short summary
+- estimated CTR
+- estimated conversions
+- estimated CPA
+- 3 to 5 advertising channels
 - risks
-- exactly four weekly actions
+- exactly 4 weekly action steps
 
 Use professional English.
 
-Do not invent live data.
+Do not claim live advertising data.
 
 """
                 },
 
 
                 {
-                    "role":"user",
+                    "role": "user",
 
-                    "content":f"""
+                    "content": f"""
 
 Product:
 {payload.product}
 
+
 Country:
 {payload.country}
 
-Budget:
+
+Monthly Budget:
 ${payload.monthly_budget}
+
 
 Goal:
 {payload.goal}
 
-Create strategy.
+
+Create the advertising strategy.
 
 """
                 }
 
             ],
 
+
             text_format=AIStrategy
 
         )
 
 
-        result=response.output_parsed
+        result = response.output_parsed
 
 
-        if not result:
+
+        if result is None:
+
             raise Exception(
                 "Empty AI response"
             )
-                percentages_total = sum(
+
+
+
+        total_percentage = sum(
+
             item.percentage
+
             for item in result.channels
+
         )
 
 
-        if percentages_total <= 0:
+
+        if total_percentage <= 0:
+
             raise Exception(
-                "Invalid channel percentages"
+                "Invalid channel allocation"
             )
+
 
 
         channels = []
 
 
+
         for item in result.channels:
 
+
             percentage = round(
-                item.percentage / percentages_total * 100
+
+                item.percentage
+                /
+                total_percentage
+                *
+                100
+
             )
 
 
             channels.append(
+
                 ChannelResponse(
 
                     channel=item.channel,
@@ -328,15 +360,21 @@ Create strategy.
                     percentage=percentage,
 
                     budget=round(
+
                         payload.monthly_budget
-                        * percentage
-                        / 100,
+                        *
+                        percentage
+                        /
+                        100,
+
                         2
+
                     ),
 
                     reason=item.reason
 
                 )
+
             )
 
 
@@ -355,35 +393,37 @@ Create strategy.
 
             risks=result.risks,
 
-            first_30_day_plan=
-                result.first_30_day_plan[:4]
+            first_30_day_plan=result.first_30_day_plan[:4]
 
         )
 
 
 
     except HTTPException:
+
         raise
+
 
 
     except Exception as error:
 
-        print(error)
+
+        print(
+            "STRATEGY ERROR:",
+            error
+        )
+
 
         raise HTTPException(
 
             status_code=502,
 
-            detail=
-            "Strategy generation failed."
+            detail="Strategy generation failed."
 
         )
-
-
-
-# =========================
-# AD ANALYSIS
-# =========================
+    # =====================
+# ANALYZE ENDPOINT
+# =====================
 
 
 @app.post(
@@ -399,9 +439,7 @@ def analyze_ad(
 
     try:
 
-
         response = client.responses.parse(
-
 
             model=OPENAI_MODEL,
 
@@ -410,35 +448,42 @@ def analyze_ad(
 
 
                 {
-                    "role":"system",
+                    "role": "system",
 
-                    "content":"""
+                    "content": """
 
 You are a senior conversion copywriter.
 
-Analyze advertisement text.
+Analyze the advertisement text.
 
 Return:
 
-- overall score
-- headline score
-- CTA score
-- trust score
+- overall score (0-100)
+- headline score (0-100)
+- CTA score (0-100)
+- trust score (0-100)
 - strengths
 - weaknesses
-- improvements
+- suggestions
 
-Professional English only.
+Use professional English.
+
+Do not invent information.
 
 """
                 },
 
 
                 {
-                    "role":"user",
+                    "role": "user",
 
-                    "content":payload.ad_text
+                    "content": f"""
 
+Analyze this advertisement:
+
+{payload.ad_text}
+
+"""
                 }
 
             ],
@@ -446,19 +491,18 @@ Professional English only.
 
             text_format=AnalyzeResponse
 
-
         )
 
 
 
-        result=response.output_parsed
+        result = response.output_parsed
 
 
 
-        if not result:
+        if result is None:
 
             raise Exception(
-                "Empty analysis"
+                "Empty analysis response"
             )
 
 
@@ -476,14 +520,16 @@ Professional English only.
     except Exception as error:
 
 
-        print(error)
+        print(
+            "ANALYZE ERROR:",
+            error
+        )
 
 
         raise HTTPException(
 
             status_code=502,
 
-            detail=
-            "Advertisement analysis failed."
+            detail="Advertisement analysis failed."
 
         )
