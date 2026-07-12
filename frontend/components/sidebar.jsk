@@ -1,0 +1,267 @@
+"use client";
+
+const navigationItems = [
+  {
+    id: "dashboard",
+    label: "Dashboard",
+  },
+  {
+    id: "campaigns",
+    label: "Campaigns",
+  },
+  {
+    id: "creatives",
+    label: "Creatives",
+  },
+  {
+    id: "competitors",
+    label: "Competitors",
+  },
+  {
+    id: "reports",
+    label: "Reports",
+  },
+];
+
+export default function Sidebar({
+  activeView,
+  setActiveView,
+  strategyForm,
+  updateStrategy,
+  createStrategy,
+  loading,
+  error,
+  websiteUrl,
+  setWebsiteUrl,
+  analyzeWebsite,
+  websiteLoading,
+  adText,
+  setAdText,
+  analyzeAd,
+  adLoading,
+}) {
+  return (
+    <aside className="sidebar">
+      <div className="logo-area">
+        <div className="logo-mark">
+          A
+        </div>
+
+        <div>
+          <h2>AdLens</h2>
+          <p>AI Growth Manager</p>
+        </div>
+      </div>
+
+      <nav className="navigation">
+        <span className="navigation-title">
+          WORKSPACE
+        </span>
+
+        {navigationItems.map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            className={`navigation-item ${
+              activeView === item.id
+                ? "active"
+                : ""
+            }`}
+            onClick={() =>
+              setActiveView(item.id)
+            }
+          >
+            {item.label}
+          </button>
+        ))}
+      </nav>
+
+      <div className="sidebar-divider" />
+
+      <span className="navigation-title">
+        AI TOOLS
+      </span>
+
+      <form
+        className="tool-card"
+        onSubmit={createStrategy}
+      >
+        <div className="tool-heading">
+          <span className="tool-icon">
+            S
+          </span>
+
+          <div>
+            <h3>Create Strategy</h3>
+            <p>
+              Build your advertising plan
+            </p>
+          </div>
+        </div>
+
+        <label>
+          Product
+
+          <input
+            name="product"
+            value={strategyForm.product}
+            onChange={updateStrategy}
+            placeholder="AI Resume Templates"
+            required
+          />
+        </label>
+
+        <label>
+          Target country
+
+          <input
+            name="country"
+            value={strategyForm.country}
+            onChange={updateStrategy}
+            placeholder="United States"
+            required
+          />
+        </label>
+
+        <label>
+          Monthly budget
+
+          <input
+            name="monthly_budget"
+            type="number"
+            min="1"
+            value={
+              strategyForm.monthly_budget
+            }
+            onChange={updateStrategy}
+            placeholder="1000"
+            required
+          />
+        </label>
+
+        <label>
+          Goal
+
+          <select
+            name="goal"
+            value={strategyForm.goal}
+            onChange={updateStrategy}
+          >
+            <option value="sales">
+              Sales
+            </option>
+
+            <option value="traffic">
+              Traffic
+            </option>
+
+            <option value="awareness">
+              Awareness
+            </option>
+
+            <option value="leads">
+              Leads
+            </option>
+          </select>
+        </label>
+
+        <button
+          type="submit"
+          disabled={loading}
+        >
+          {loading
+            ? "Generating..."
+            : "Generate Strategy"}
+        </button>
+
+        {error && (
+          <p className="error">
+            {error}
+          </p>
+        )}
+      </form>
+
+      <form
+        className="tool-card"
+        onSubmit={analyzeWebsite}
+      >
+        <div className="tool-heading">
+          <span className="tool-icon">
+            W
+          </span>
+
+          <div>
+            <h3>Website Analyzer</h3>
+            <p>
+              Understand any business URL
+            </p>
+          </div>
+        </div>
+
+        <label>
+          Website URL
+
+          <input
+            type="url"
+            value={websiteUrl}
+            onChange={(event) =>
+              setWebsiteUrl(
+                event.target.value
+              )
+            }
+            placeholder="https://yourwebsite.com"
+            required
+          />
+        </label>
+
+        <button
+          type="submit"
+          disabled={websiteLoading}
+        >
+          {websiteLoading
+            ? "Analyzing..."
+            : "Analyze Website"}
+        </button>
+      </form>
+
+      <form
+        className="tool-card"
+        onSubmit={analyzeAd}
+      >
+        <div className="tool-heading">
+          <span className="tool-icon">
+            C
+          </span>
+
+          <div>
+            <h3>Analyze My Ad</h3>
+            <p>
+              Review your advertising copy
+            </p>
+          </div>
+        </div>
+
+        <textarea
+          value={adText}
+          onChange={(event) =>
+            setAdText(
+              event.target.value
+            )
+          }
+          placeholder="Paste your advertisement..."
+          rows={6}
+          required
+        />
+
+        <button
+          type="submit"
+          disabled={adLoading}
+        >
+          {adLoading
+            ? "Analyzing..."
+            : "Analyze Advertisement"}
+        </button>
+      </form>
+    </aside>
+  );
+}
