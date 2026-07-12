@@ -680,3 +680,12 @@ textarea:focus {
     font-size: 42px;
   }
 }
+.channel-icon svg {
+  width: 19px;
+  height: 19px;
+}
+
+.navigation-item {
+  display: block;
+  text-decoration: none;
+}
