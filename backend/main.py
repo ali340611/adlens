@@ -533,3 +533,131 @@ Analyze this advertisement:
             detail="Advertisement analysis failed."
 
         )
+    # =====================
+# WEBSITE ANALYZER
+# =====================
+
+class WebsiteAnalyzeRequest(BaseModel):
+
+    url: str = Field(
+        min_length=5,
+        max_length=500
+    )
+
+
+
+class WebsiteAnalysisResponse(BaseModel):
+
+    brand: str
+
+    product: str
+
+    target_audience: str
+
+    pain_points: list[str]
+
+    value_proposition: str
+
+    recommended_channels: list[str]
+
+
+
+@app.post(
+    "/website-analysis",
+    response_model=WebsiteAnalysisResponse
+)
+def analyze_website(
+    payload: WebsiteAnalyzeRequest
+):
+
+    client = get_client()
+
+
+    try:
+
+        response = client.responses.parse(
+
+            model=OPENAI_MODEL,
+
+            input=[
+
+                {
+                    "role":"system",
+
+                    "content":"""
+
+You are AdLens AI,
+a growth marketing expert.
+
+Analyze a business website URL.
+
+Create:
+
+- brand name
+- product description
+- target audience
+- customer pain points
+- value proposition
+- recommended advertising channels
+
+Important:
+You cannot browse the website.
+Use the URL context only.
+Do not claim you visited the website.
+
+Professional English.
+
+"""
+                },
+
+
+                {
+                    "role":"user",
+
+                    "content":f"""
+
+Website URL:
+
+{payload.url}
+
+Analyze this business.
+
+"""
+                }
+
+            ],
+
+            text_format=WebsiteAnalysisResponse
+
+        )
+
+
+        result = response.output_parsed
+
+
+        if result is None:
+
+            raise Exception(
+                "Empty website analysis"
+            )
+
+
+        return result
+
+
+
+    except Exception as error:
+
+        print(
+            "WEBSITE ANALYSIS ERROR:",
+            error
+        )
+
+
+        raise HTTPException(
+
+            status_code=502,
+
+            detail="Website analysis failed."
+
+        )
