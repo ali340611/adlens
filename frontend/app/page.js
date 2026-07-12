@@ -2,18 +2,16 @@
 
 import { useState } from "react";
 
-
 const API_URL =
   "https://adlens-backend-wt43.onrender.com";
 
 
-const initialStrategyForm = {
-  product: "",
-  country: "",
-  monthly_budget: "",
+const initialForm = {
+  product: "AI Resume Templates",
+  country: "United States",
+  monthly_budget: "1000",
   goal: "sales",
 };
-
 
 
 async function apiRequest(endpoint, payload) {
@@ -22,11 +20,10 @@ async function apiRequest(endpoint, payload) {
     `${API_URL}${endpoint}`,
     {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+      headers:{
+        "Content-Type":"application/json",
       },
-
-      body: JSON.stringify(payload),
+      body:JSON.stringify(payload),
     }
   );
 
@@ -34,130 +31,80 @@ async function apiRequest(endpoint, payload) {
   const data = await response.json();
 
 
-  if (!response.ok) {
-
+  if(!response.ok){
     throw new Error(
       data.detail || "Request failed"
     );
-
   }
 
 
   return data;
+}
+
+
+
+export default function Home(){
+
+const [form,setForm] = useState(initialForm);
+
+const [strategy,setStrategy] = useState(null);
+
+const [loading,setLoading] = useState(false);
+
+const [error,setError] = useState("");
+
+const [adText,setAdText] = useState("");
+
+const [analysis,setAnalysis] = useState(null);
+
+
+
+function update(e){
+
+setForm({
+ ...form,
+ [e.target.name]:e.target.value
+});
 
 }
 
 
 
-export default function Home() {
-
-
-const [strategyForm,setStrategyForm] =
-useState(initialStrategyForm);
-
-
-const [strategyResult,setStrategyResult] =
-useState(null);
-
-
-const [strategyLoading,setStrategyLoading] =
-useState(false);
-
-
-const [strategyError,setStrategyError] =
-useState("");
-
-
-
-const [adText,setAdText] =
-useState("");
-
-
-const [analysisResult,setAnalysisResult] =
-useState(null);
-
-
-const [analysisLoading,setAnalysisLoading] =
-useState(false);
-
-
-
-function updateStrategyField(e){
-
-const {
-name,
-value
-}=e.target;
-
-
-setStrategyForm(
-current=>({
-...current,
-[name]:value
-})
-);
-
-}
-
-
-
-
-async function generateStrategy(e){
+async function generate(e){
 
 e.preventDefault();
 
+setLoading(true);
 
-setStrategyLoading(true);
-
-setStrategyError("");
-
+setError("");
 
 try{
 
-
-const result =
-await apiRequest(
+const result = await apiRequest(
 "/strategy",
 {
-
-product:
-strategyForm.product,
-
-
-country:
-strategyForm.country,
-
-
-monthly_budget:
-Number(
-strategyForm.monthly_budget
-),
-
-
-goal:
-strategyForm.goal
-
+product:form.product,
+country:form.country,
+monthly_budget:Number(form.monthly_budget),
+goal:form.goal
 }
 );
 
 
-setStrategyResult(result);
+setStrategy(result);
 
 
 }
 
-catch(error){
+catch(err){
 
-setStrategyError(
-error.message
-);
+setError(err.message);
 
 }
-
 
 finally{
 
-setStrategyLoading(false);
+setLoading(false);
 
 }
 
@@ -166,44 +113,30 @@ setStrategyLoading(false);
 
 
 
-
-async function analyzeAdvertisement(e){
+async function analyze(e){
 
 e.preventDefault();
 
 
-setAnalysisLoading(true);
-
-
 try{
-
 
 const result =
 await apiRequest(
 "/analyze",
 {
-ad_text:
-adText
+ad_text:adText
 }
 );
 
 
-setAnalysisResult(result);
+setAnalysis(result);
 
 
 }
 
-catch(error){
+catch(err){
 
-alert(
-error.message
-);
-
-}
-
-finally{
-
-setAnalysisLoading(false);
+alert(err.message);
 
 }
 
@@ -213,505 +146,112 @@ setAnalysisLoading(false);
 
 return (
 
-<main className="page">
+<main className="dashboard">
 
 
-<section className="hero">
+<aside className="sidebar">
 
-
-<div className="brand">
-ADLENS
+<div className="logo">
+🟣 AdLens
 </div>
 
-
-<span className="eyebrow">
-AI ADVERTISING DECISION PLATFORM
-</span>
-
-
-<h1>
-Turn your ad budget into a clear action plan.
-</h1>
-
-
-<p>
-Create advertising strategies and analyze your campaigns with AI.
+<p className="small">
+AI Strategy Studio
 </p>
 
 
-</section>
-<section className="workspace">
+<div className="side-card">
 
-
-<form
-className="card form-card"
-onSubmit={generateStrategy}
->
-
-
-<h2>
+<h3>
 Create Strategy
-</h2>
-
+</h3>
 
 
 <label>
 Product
+</label>
 
 <input
 name="product"
-value={strategyForm.product}
-onChange={updateStrategyField}
-placeholder="AI Resume Templates"
-required
+value={form.product}
+onChange={update}
 />
-
-</label>
 
 
 
 <label>
 Target Country
+</label>
+
 
 <input
 name="country"
-value={strategyForm.country}
-onChange={updateStrategyField}
-placeholder="United States"
-required
+value={form.country}
+onChange={update}
 />
-
-</label>
 
 
 
 <label>
 Monthly Budget
-
-<input
-type="number"
-name="monthly_budget"
-value={strategyForm.monthly_budget}
-onChange={updateStrategyField}
-placeholder="1000"
-required
-/>
-
 </label>
 
+
+<input
+name="monthly_budget"
+value={form.monthly_budget}
+onChange={update}
+/>
 
 
 
 <label>
 Goal
+</label>
 
 
 <select
 name="goal"
-value={strategyForm.goal}
-onChange={updateStrategyField}
+value={form.goal}
+onChange={update}
 >
-
 
 <option value="sales">
 Sales
 </option>
 
-
 <option value="traffic">
 Traffic
 </option>
-
-
-<option value="awareness">
-Awareness
-</option>
-
 
 <option value="leads">
 Leads
 </option>
 
-
 </select>
-
-
-</label>
-
 
 
 
 <button
-type="submit"
-disabled={strategyLoading}
+onClick={generate}
 >
 
-
-{
-strategyLoading
-?
-"Generating Strategy..."
-:
-"Generate Strategy"
-}
-
+✨ Generate Strategy
 
 </button>
 
 
-
-{
-strategyError &&
-
-<p className="error">
-{strategyError}
-</p>
-
-}
-
-
-
-</form>
-
-
-
-
-
-
-<section className="card result-card">
-
-
-{
-
-!strategyResult ?
-
-
-(
-
-<div className="empty">
-
-
-<div className="score-placeholder">
-AI
-</div>
-
-
-<h2>
-Your strategy will appear here.
-</h2>
-
-
-<p>
-Generate your AI advertising plan.
-</p>
-
-
-</div>
-
-
-)
-
-
-:
-
-
-(
-
-
-<>
-
-
-<div className="premium-score-card">
-
-
-<div>
-
-
-<span className="eyebrow">
-ADLENS SCORE
-</span>
-
-
-<div className="score-big">
-
-{strategyResult.score}
-
-<span>
-/100
-</span>
-
-</div>
-
-
-
-<strong>
-{strategyResult.performance_level}
-</strong>
-
-
 </div>
 
 
 
 
-<p>
-
-{strategyResult.summary}
-
-</p>
-
-
-
-</div>
-
-
-
-
-
-{
-
-strategyResult.expected_results &&
-
-
-<div className="metrics-grid">
-
-
-<div className="metric-card">
-
-<span>
-CTR
-</span>
-
-
-<strong>
-{
-strategyResult.expected_results.estimated_ctr
-}
-</strong>
-
-</div>
-
-
-
-<div className="metric-card">
-
-<span>
-Conversions
-</span>
-
-
-<strong>
-{
-strategyResult.expected_results.estimated_conversions
-}
-</strong>
-
-
-</div>
-
-
-
-
-<div className="metric-card">
-
-<span>
-CPA
-</span>
-
-
-<strong>
-{
-strategyResult.expected_results.estimated_cpa
-}
-</strong>
-
-
-</div>
-
-
-</div>
-
-
-}
-
-
+<div className="side-card analyze">
 
 
 <h3>
-Recommended Channels
-</h3>
-
-
-
-<div className="channels">
-
-
-{
-
-strategyResult.channels.map(
-
-(item,index)=>(
-
-
-<article
-className="channel"
-key={index}
->
-
-
-<div className="channel-top">
-
-
-<strong>
-{item.channel}
-</strong>
-
-
-<span>
-{item.percentage}%
-</span>
-
-
-</div>
-
-
-
-<div className="bar">
-
-<div
-style={{
-width:`${item.percentage}%`
-}}
-/>
-
-</div>
-
-
-
-<p>
-Budget:
-$
-{item.budget}
-</p>
-
-
-<small>
-{item.reason}
-</small>
-
-
-
-</article>
-
-
-)
-
-)
-
-
-}
-
-
-
-</div>
-id="3/3"
-{
-
-strategyResult.risks &&
-
-<>
-
-<h3>
-Potential Risks
-</h3>
-
-
-<div className="risk-box">
-
-{
-strategyResult.risks.map(
-
-(item,index)=>(
-
-<p key={index}>
-⚠ {item}
-</p>
-
-)
-
-)
-}
-
-</div>
-
-</>
-
-}
-
-
-
-
-<h3>
-First 30-Day Plan
-</h3>
-
-
-
-<ol className="plan">
-
-
-{
-
-strategyResult.first_30_day_plan.map(
-
-(step,index)=>(
-
-<li key={index}>
-{step}
-</li>
-
-)
-
-)
-
-}
-
-
-</ol>
-
-
-
-</>
-
-)
-
-}
-
-
-</section>
-
-
-</section>
-
-
-
-
-
-
-
-<section className="workspace">
-
-
-<form
-className="card form-card"
-onSubmit={analyzeAdvertisement}
->
-
-
-<h2>
 Analyze My Ad
-</h2>
-
+</h3>
 
 
 <textarea
@@ -719,132 +259,138 @@ Analyze My Ad
 value={adText}
 
 onChange={
-(e)=>setAdText(e.target.value)
+e=>setAdText(e.target.value)
 }
 
-
-placeholder="Paste your advertisement text here..."
-
-
-rows="10"
-
-
-required
+placeholder="Paste advertisement..."
 
 />
 
 
-
-
 <button
-disabled={analysisLoading}
+onClick={analyze}
 >
-
-
-{
-
-analysisLoading
-
-?
-
-"Analyzing..."
-
-:
-
-"Analyze Advertisement"
-
-}
-
-
+Analyze Advertisement
 </button>
 
 
-
-</form>
-
+</div>
 
 
+</aside>
 
 
-<section className="card result-card">
+
+
+
+<section className="main-area">
+
+
+<header className="topbar">
+
+<div>
+<h2>
+AdLens AI
+</h2>
+
+<span>
+Advertising Intelligence Platform
+</span>
+
+</div>
+
+
+<div className="user">
+MA
+</div>
+
+
+</header>
+
 
 
 {
+!strategy ?
 
-analysisResult &&
+<div className="empty-dashboard">
+
+<h1>
+Create your first AI strategy
+</h1>
+
+<p>
+Generate an advertising plan with AI.
+</p>
+
+</div>
+
+
+:
+
 
 <>
 
 
-<div className="premium-score-card">
+<section className="overview card">
+
+
+<div className="overview-title">
+
+<h2>
+Strategy Overview
+</h2>
+
+
+<span className="badge">
+{strategy.performance_level}
+</span>
+
+
+</div>
+
+
+<p>
+{strategy.summary}
+</p>
+
+
+
+<div className="metrics">
 
 
 <div>
-
-<span className="eyebrow">
-AD PERFORMANCE SCORE
-</span>
-
-
-<div className="score-big">
-
-{analysisResult.score}
-
 <span>
-/100
-</span>
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-<div className="metrics-grid">
-
-
-<div className="metric-card">
-
-<span>
-Headline
+CTR
 </span>
 
 <strong>
-{analysisResult.headline_score}
+{strategy.expected_results?.estimated_ctr}
 </strong>
 
 </div>
 
 
 
-<div className="metric-card">
-
+<div>
 <span>
-CTA
+Conversions
 </span>
 
 <strong>
-{analysisResult.cta_score}
+{strategy.expected_results?.estimated_conversions}
 </strong>
 
 </div>
 
 
 
-<div className="metric-card">
-
+<div>
 <span>
-Trust
+CPA
 </span>
 
 <strong>
-{analysisResult.trust_score}
+{strategy.expected_results?.estimated_cpa}
 </strong>
 
 </div>
@@ -854,52 +400,236 @@ Trust
 
 
 
-
-<h3>
-Strengths
-</h3>
+</section>
+      <section className="content-grid">
 
 
-{
+        <div className="card channels-card">
 
-analysisResult.strengths.map(
-
-(item,index)=>(
-
-<p key={index}>
-✓ {item}
-</p>
-
-)
-
-)
-
-}
+          <h2>
+            Recommended Channels
+          </h2>
 
 
+          <div className="channels">
 
 
-<h3>
-Improvements
-</h3>
+          {
+            strategy.channels.map(
+              (item,index)=>(
+
+
+                <article
+                  className="channel-item"
+                  key={index}
+                >
+
+                  <div className="channel-header">
+
+                    <strong>
+                      {item.channel}
+                    </strong>
+
+                    <span>
+                      {item.percentage}%
+                    </span>
+
+                  </div>
+
+
+                  <div className="progress">
+
+                    <div
+                      style={{
+                        width:
+                        `${item.percentage}%`
+                      }}
+                    />
+
+                  </div>
+
+
+                  <p>
+                    Budget:
+                    {" "}
+                    ${item.budget}
+                  </p>
+
+
+                  <small>
+                    {item.reason}
+                  </small>
+
+
+                </article>
+
+
+              )
+            )
+          }
+
+
+          </div>
+
+        </div>
 
 
 
-{
 
-analysisResult.suggestions.map(
+        <div className="card score-card">
 
-(item,index)=>(
+          <h2>
+            ADLENS Score
+          </h2>
 
-<p key={index}>
-→ {item}
-</p>
 
-)
+          <div className="circle-score">
 
-)
+            {strategy.score}
 
-}
+            <span>
+              /100
+            </span>
+
+          </div>
+
+
+
+          <p>
+            AI evaluation based on budget,
+            market and advertising goal.
+          </p>
+
+
+        </div>
+
+
+
+      </section>
+
+
+
+
+
+
+      <section className="bottom-grid">
+
+
+
+        <div className="card">
+
+          <h2>
+            Potential Risks
+          </h2>
+
+
+          {
+            strategy.risks?.map(
+              (risk,index)=>(
+
+                <p key={index}>
+                  ⚠ {risk}
+                </p>
+
+              )
+            )
+          }
+
+
+        </div>
+
+
+
+
+        <div className="card">
+
+
+          <h2>
+            First 30-Day Plan
+          </h2>
+
+
+          <ol>
+
+          {
+            strategy.first_30_day_plan?.map(
+              (step,index)=>(
+
+                <li key={index}>
+                  {step}
+                </li>
+
+              )
+            )
+          }
+
+          </ol>
+
+
+        </div>
+
+
+
+      </section>
+
+
+
+
+      {
+        analysis &&
+
+        <section className="card analysis-result">
+
+
+          <h2>
+            Ad Analysis
+          </h2>
+
+
+          <div className="metrics">
+
+
+            <div>
+              <span>
+                Score
+              </span>
+
+              <strong>
+                {analysis.score}
+              </strong>
+            </div>
+
+
+            <div>
+              <span>
+                Headline
+              </span>
+
+              <strong>
+                {analysis.headline_score}
+              </strong>
+            </div>
+
+
+            <div>
+              <span>
+                CTA
+              </span>
+
+              <strong>
+                {analysis.cta_score}
+              </strong>
+            </div>
+
+
+          </div>
+
+
+
+        </section>
+
+      }
+
 
 
 </>
@@ -910,12 +640,8 @@ analysisResult.suggestions.map(
 </section>
 
 
-</section>
-
-
-
-
 </main>
+
 
 );
 
