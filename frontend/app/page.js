@@ -2,30 +2,90 @@
 
 import { useState } from "react";
 
+import {
+  LayoutDashboard,
+  Megaphone,
+  Palette,
+  Users,
+  BarChart3,
+  Globe,
+  Sparkles,
+  Target,
+  Brain,
+  Search,
+  Rocket
+} from "lucide-react";
+
 
 const API_URL =
-  "https://adlens-backend-wt43.onrender.com";
+"https://adlens-backend-wt43.onrender.com";
+
+
+
+const menu = [
+
+{
+name:"Dashboard",
+icon:LayoutDashboard
+},
+
+{
+name:"Campaigns",
+icon:Megaphone
+},
+
+{
+name:"Creatives",
+icon:Palette
+},
+
+{
+name:"Competitors",
+icon:Users
+},
+
+{
+name:"Reports",
+icon:BarChart3
+}
+
+];
+
+
+
 
 
 export default function Home(){
 
-const [active,setActive]=useState("Dashboard");
 
-
-const [loading,setLoading]=useState(false);
-
-
-const [strategy,setStrategy]=useState(null);
-
-
-const [adResult,setAdResult]=useState(null);
-
-
-const [websiteResult,setWebsiteResult]=useState(null);
+const [active,setActive] =
+useState("Dashboard");
 
 
 
-const [form,setForm]=useState({
+const [loading,setLoading] =
+useState(false);
+
+
+
+const [strategy,setStrategy] =
+useState(null);
+
+
+
+const [adResult,setAdResult] =
+useState(null);
+
+
+
+const [websiteResult,setWebsiteResult] =
+useState(null);
+
+
+
+
+const [form,setForm] =
+useState({
 
 product:"AI Resume Templates",
 
@@ -39,26 +99,35 @@ goal:"sales"
 
 
 
-const [website,setWebsite]=useState("");
 
-const [adText,setAdText]=useState("");
+const [website,setWebsite] =
+useState("");
+
+
+
+const [adText,setAdText] =
+useState("");
+
+
+
 
 
 
 
 function updateForm(e){
 
+
 setForm({
 
 ...form,
 
-[e.target.name]:e.target.value
+[e.target.name]:
+e.target.value
 
 });
 
+
 }
-
-
 
 
 
@@ -73,7 +142,8 @@ setLoading(true);
 try{
 
 
-const response = await fetch(
+const res =
+await fetch(
 
 `${API_URL}/strategy`,
 
@@ -83,7 +153,8 @@ method:"POST",
 
 headers:{
 
-"Content-Type":"application/json"
+"Content-Type":
+"application/json"
 
 },
 
@@ -94,11 +165,13 @@ product:form.product,
 
 country:form.country,
 
-monthly_budget:Number(form.monthly_budget),
+monthly_budget:
+Number(form.monthly_budget),
 
 goal:form.goal
 
 })
+
 
 }
 
@@ -107,10 +180,8 @@ goal:form.goal
 
 
 const data =
-await response.json();
+await res.json();
 
-
-console.log(data);
 
 
 setStrategy(data);
@@ -119,15 +190,14 @@ setStrategy(data);
 
 }
 
-catch(error){
-
-console.log(error);
+catch(e){
 
 alert(
 "Strategy failed"
 );
 
 }
+
 
 finally{
 
@@ -142,15 +212,14 @@ setLoading(false);
 
 
 
-
-
 async function analyzeAd(){
 
 
 try{
 
 
-const response = await fetch(
+const res =
+await fetch(
 
 `${API_URL}/analyze`,
 
@@ -160,7 +229,8 @@ method:"POST",
 
 headers:{
 
-"Content-Type":"application/json"
+"Content-Type":
+"application/json"
 
 },
 
@@ -178,17 +248,15 @@ ad_text:adText
 
 
 const data =
-await response.json();
-
+await res.json();
 
 
 setAdResult(data);
 
 
-
 }
 
-catch(error){
+catch(e){
 
 alert(
 "Ad analysis failed"
@@ -197,10 +265,7 @@ alert(
 }
 
 
-
 }
-
-
 
 
 
@@ -211,7 +276,8 @@ async function analyzeWebsite(){
 try{
 
 
-const response = await fetch(
+const res =
+await fetch(
 
 `${API_URL}/website-analysis`,
 
@@ -221,7 +287,8 @@ method:"POST",
 
 headers:{
 
-"Content-Type":"application/json"
+"Content-Type":
+"application/json"
 
 },
 
@@ -239,17 +306,15 @@ url:website
 
 
 const data =
-await response.json();
-
+await res.json();
 
 
 setWebsiteResult(data);
 
 
-
 }
 
-catch(error){
+catch(e){
 
 alert(
 "Website analysis failed"
@@ -267,11 +332,13 @@ return (
 <aside className="sidebar">
 
 
-<div className="logo-area">
+<div className="brand">
 
 
-<div className="logo-mark">
-A
+<div className="brand-icon">
+
+<Brain size={26}/>
+
 </div>
 
 
@@ -281,12 +348,10 @@ A
 AdLens
 </h2>
 
-
 <p>
-AI Growth Manager
+AI Growth Platform
 </p>
 
-
 </div>
 
 
@@ -296,27 +361,26 @@ AI Growth Manager
 
 
 
-<div className="menu">
+<nav className="menu">
 
 
 {
 
-[
-"Dashboard",
-"Campaigns",
-"Creatives",
-"Competitors",
-"Reports"
+menu.map(item=>{
 
-].map(item=>(
 
+const Icon =
+item.icon;
+
+
+return (
 
 <button
 
-key={item}
+key={item.name}
 
 className={
-active===item
+active===item.name
 ?
 "active"
 :
@@ -324,32 +388,48 @@ active===item
 }
 
 
-onClick={()=>setActive(item)}
+onClick={()=>setActive(item.name)}
 
 >
 
-{item}
+
+<Icon size={18}/>
+
+
+<span>
+{item.name}
+</span>
+
 
 </button>
 
+)
 
-))
+
+})
+
 
 }
 
 
-</div>
+
+</nav>
 
 
 
 
 
 
-<div className="side-box">
+
+<div className="tool-card">
 
 
 <h3>
-Create Strategy
+
+<Sparkles size={18}/>
+
+AI Strategy
+
 </h3>
 
 
@@ -390,9 +470,10 @@ value={form.monthly_budget}
 
 onChange={updateForm}
 
-placeholder="Budget"
+placeholder="Monthly Budget"
 
 />
+
 
 
 
@@ -427,18 +508,24 @@ Leads
 
 
 
+
 <button
 
 onClick={generateStrategy}
 
 >
 
+
 {
 
 loading
+
 ?
+
 "Generating..."
+
 :
+
 "Generate Strategy"
 
 }
@@ -456,11 +543,16 @@ loading
 
 
 
-<div className="side-box">
+
+<div className="tool-card">
 
 
 <h3>
+
+<Globe size={18}/>
+
 Website Analyzer
+
 </h3>
 
 
@@ -473,7 +565,7 @@ onChange={
 e=>setWebsite(e.target.value)
 }
 
-placeholder="https://website.com"
+placeholder="Website URL"
 
 />
 
@@ -499,18 +591,21 @@ Analyze Website
 
 
 
-<div className="side-box">
+<div className="tool-card">
 
 
 <h3>
+
+<Target size={18}/>
+
 Analyze My Ad
+
 </h3>
 
 
 
-<textarea
 
-rows="5"
+<textarea
 
 value={adText}
 
@@ -518,7 +613,7 @@ onChange={
 e=>setAdText(e.target.value)
 }
 
-placeholder="Paste advertisement"
+placeholder="Paste your ad copy"
 
 />
 
@@ -549,6 +644,7 @@ Analyze Advertisement
 
 
 
+
 <section className="main-area">
 
 
@@ -558,7 +654,7 @@ Analyze Advertisement
 
 <div>
 
-<span className="label">
+<span className="eyebrow">
 ADVERTISING INTELLIGENCE
 </span>
 
@@ -569,7 +665,7 @@ ADVERTISING INTELLIGENCE
 
 
 <p>
-AI powered marketing workspace
+AI powered advertising workspace
 </p>
 
 
@@ -577,12 +673,11 @@ AI powered marketing workspace
 
 
 
-<div className="avatar">
+<div className="profile">
 
 MA
 
 </div>
-
 
 
 </header>
@@ -590,40 +685,97 @@ MA
 
 active==="Dashboard" && (
 
-strategy ? (
 
-<section className="card">
+strategy ?
 
 
-<div className="card-header">
+<section className="dashboard-result">
+
+
+
+<div className="hero-card">
+
+
+<div>
+
+
+<span className="tag">
+
+<Brain size={14}/>
+
+AI STRATEGY
+
+</span>
+
 
 <h2>
 {form.product}
 </h2>
 
 
-<span className="badge">
-AI Generated
-</span>
+<p>
+
+{
+strategy.summary ||
+"AI generated advertising strategy"
+}
+
+</p>
 
 
 </div>
 
 
 
-<p>
+
+<div className="score">
+
+
+<span>
+AI SCORE
+</span>
+
+
+<strong>
+
 {
-strategy.summary
-||
-"AI strategy generated successfully."
+strategy.score || 85
 }
-</p>
+
+</strong>
+
+
+<small>
+/100
+
+</small>
+
+
+</div>
 
 
 
-<h3>
+</div>
+
+
+
+
+
+
+
+<h2 className="section-title">
+
+< Rocket size={20}/>
+
 Recommended Channels
-</h3>
+
+</h2>
+
+
+
+
+
+<div className="channel-grid">
 
 
 
@@ -636,14 +788,15 @@ strategy.channels?.map(
 
 <div
 
-className="channel"
+className="channel-card"
 
 key={index}
 
 >
 
 
-<div className="channel-top">
+
+<div className="channel-head">
 
 
 <strong>
@@ -651,16 +804,21 @@ key={index}
 </strong>
 
 
-<strong>
+<span>
+
 {channel.percentage}%
-</strong>
+
+</span>
 
 
 </div>
 
 
 
-<div className="bar">
+
+
+<div className="progress">
+
 
 <div
 
@@ -673,20 +831,61 @@ width:
 
 />
 
+
 </div>
 
 
 
-<small>
+
+
+<p>
 {channel.reason}
-</small>
+</p>
+
+
+
+
+
+<div className="budget">
+
+
+Budget:
+
+<strong>
+
+$
+
+{
+
+Math.round(
+
+Number(form.monthly_budget)
+
+*
+
+channel.percentage
+
+/
+
+100
+
+)
+
+}
+
+</strong>
+
+
+</div>
 
 
 
 </div>
+
 
 
 )
+
 
 )
 
@@ -694,20 +893,53 @@ width:
 }
 
 
+</div>
+
+
+
+
+
+
+
+<div className="plan-card">
+
+
+<h3>
+30 Day Action Plan
+</h3>
+
+
+<p>
+✓ Launch campaigns
+</p>
+
+
+<p>
+✓ Test creatives
+</p>
+
+
+<p>
+✓ Optimize performance
+</p>
+
+
+</div>
+
+
 
 </section>
 
 
-)
+
+
 
 :
 
-<section className="card empty">
+<section className="empty-card">
 
 
-<div className="empty-icon">
-AI
-</div>
+<Sparkles size={45}/>
 
 
 <h2>
@@ -716,17 +948,19 @@ Create your first AI strategy
 
 
 <p>
-Generate your advertising plan.
+Generate your advertising plan from the sidebar.
 </p>
 
 
 </section>
 
 
+
 )
 
 
 }
+
 
 
 
@@ -738,15 +972,17 @@ Generate your advertising plan.
 
 active==="Campaigns" && (
 
+
 <section className="card">
 
+
 <h2>
-Campaign Management
+Campaign Center
 </h2>
 
 
 <p>
-Manage campaigns, budgets and results.
+Manage campaigns, budgets and performance.
 </p>
 
 
@@ -754,6 +990,7 @@ Manage campaigns, budgets and results.
 
 
 )
+
 
 }
 
@@ -767,34 +1004,21 @@ Manage campaigns, budgets and results.
 
 active==="Creatives" && (
 
+
 <section className="card">
 
+
 <h2>
-AI Creative Studio
+Creative Studio
 </h2>
 
 
-<div className="creative-grid">
+<div className="creative-box">
 
 
-<button>
-Facebook Ad Copy
-</button>
+<Palette/>
 
-
-<button>
-Google Ads
-</button>
-
-
-<button>
-LinkedIn Ads
-</button>
-
-
-<button>
-Email Campaign
-</button>
+Generate AI Ad Creatives
 
 
 </div>
@@ -804,6 +1028,7 @@ Email Campaign
 
 
 )
+
 
 }
 
@@ -817,15 +1042,19 @@ Email Campaign
 
 active==="Competitors" && (
 
+
 <section className="card">
+
 
 <h2>
 Competitor Intelligence
 </h2>
 
 
+<Search/>
+
 <p>
-Analyze competitors and market opportunities.
+Analyze competitor positioning.
 </p>
 
 
@@ -834,7 +1063,9 @@ Analyze competitors and market opportunities.
 
 )
 
+
 }
+
 
 
 
@@ -845,58 +1076,52 @@ Analyze competitors and market opportunities.
 
 active==="Reports" && (
 
+
 <section className="card">
 
 
 <h2>
-Performance Reports
+Reports Dashboard
 </h2>
 
 
-
-<div className="stats">
+<div className="report-grid">
 
 
 <div>
 
-<span>
 Spend
-</span>
 
 <strong>
 $1500
 </strong>
 
-</div>
 
+</div>
 
 
 <div>
 
-<span>
 Conversions
-</span>
 
 <strong>
 42
 </strong>
 
-</div>
 
+</div>
 
 
 <div>
 
-<span>
 ROAS
-</span>
 
 <strong>
 3.4x
 </strong>
 
-</div>
 
+</div>
 
 
 </div>
@@ -907,7 +1132,10 @@ ROAS
 
 )
 
+
 }
+
+
 
 
 
@@ -922,7 +1150,7 @@ adResult && (
 
 
 <h2>
-Ad Analysis Result
+Ad Analysis
 </h2>
 
 
@@ -942,6 +1170,9 @@ Score: {adResult.score}
 
 
 
+
+
+
 {
 
 websiteResult && (
@@ -950,7 +1181,7 @@ websiteResult && (
 
 
 <h2>
-Website Analysis Result
+Website Analysis
 </h2>
 
 
@@ -976,13 +1207,11 @@ null,
 
 
 
-
-
 </section>
 
 
-</main>
 
+</main>
 
 );
 
