@@ -1,6 +1,3 @@
-cd ~/Desktop/adlens/adlens-mvp
-
-cat > frontend/app/page.js <<'EOF'
 "use client";
 
 import { useState } from "react";
@@ -2412,4 +2409,3 @@ export default function HomePage() {
     </div>
   );
 }
-EOF
