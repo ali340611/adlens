@@ -1775,3 +1775,493 @@ svg {
     grid-template-columns: 22px 34px minmax(0, 1fr) 16px;
   }
 }
+
+/* ADLENS_PIXEL_MATCH_START */
+
+/* Referans tasarıma daha yakın, kompakt 16:9 masaüstü düzeni */
+:root {
+  --sidebar-width: 188px;
+  --topbar-height: 68px;
+}
+
+body {
+  background:
+    radial-gradient(circle at 48% -15%, rgba(85, 35, 190, 0.12), transparent 31%),
+    linear-gradient(180deg, #020611 0%, #02050c 100%);
+}
+
+.sidebar {
+  background:
+    radial-gradient(circle at 35% 5%, rgba(100, 45, 220, 0.12), transparent 27%),
+    linear-gradient(180deg, #050a16 0%, #030711 100%);
+}
+
+.sidebar-header {
+  min-height: var(--topbar-height);
+  padding-inline: 13px;
+}
+
+.brand-mark {
+  width: 35px;
+  height: 35px;
+  border-radius: 9px;
+}
+
+.brand-copy strong {
+  font-size: 15px;
+}
+
+.brand-copy span {
+  font-size: 7px;
+}
+
+.sidebar-scroll {
+  padding: 13px 10px 10px;
+}
+
+.sidebar-group + .sidebar-group {
+  margin-top: 17px;
+}
+
+.sidebar-group-title {
+  margin-bottom: 7px;
+  font-size: 7px;
+}
+
+.sidebar-nav {
+  gap: 2px;
+}
+
+.sidebar-item {
+  min-height: 33px;
+  gap: 9px;
+  padding-inline: 9px;
+  border-radius: 7px;
+}
+
+.sidebar-item > span {
+  font-size: 9px;
+}
+
+.premium-panel {
+  margin-top: 16px;
+  padding: 12px;
+}
+
+.premium-panel p {
+  margin: 8px 0 11px;
+  font-size: 7px;
+  line-height: 1.5;
+}
+
+.premium-panel > button {
+  height: 31px;
+}
+
+.sidebar-profile {
+  min-height: 61px;
+  padding: 10px 13px;
+}
+
+.topbar {
+  min-height: var(--topbar-height);
+  padding-inline: 17px;
+}
+
+.welcome-copy h1 {
+  font-size: 15px;
+}
+
+.welcome-copy p {
+  margin-top: 4px;
+  font-size: 8px;
+}
+
+.topbar-button,
+.new-strategy-button,
+.notification-button,
+.topbar-profile {
+  height: 34px;
+}
+
+.topbar-button {
+  padding-inline: 10px;
+  font-size: 8px;
+}
+
+.new-strategy-button {
+  padding-inline: 12px;
+  font-size: 8px;
+}
+
+.notification-button {
+  width: 34px;
+}
+
+.integration-item {
+  min-width: 68px;
+  padding-inline: 8px;
+}
+
+.dashboard-container {
+  max-width: none;
+  padding: 11px 14px 18px;
+}
+
+/* Genel kart görünümü */
+.dashboard-card {
+  border-color: rgba(150, 165, 195, 0.115);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(77, 45, 155, 0.055), transparent 32%),
+    linear-gradient(145deg, rgba(8, 16, 31, 0.99), rgba(4, 9, 19, 0.99));
+  box-shadow:
+    0 14px 38px rgba(0, 0, 0, 0.17),
+    inset 0 1px rgba(255, 255, 255, 0.018);
+}
+
+/* Üst büyük alan */
+.hero-section {
+  min-height: 225px;
+  grid-template-columns: 1.08fr 1.47fr 0.88fr;
+}
+
+.hero-revenue {
+  padding: 17px 19px;
+}
+
+.hero-labels {
+  gap: 8px;
+}
+
+.hero-pill,
+.health-pill {
+  padding: 6px 9px;
+  font-size: 7px;
+}
+
+.revenue-value {
+  margin-top: 12px;
+}
+
+.revenue-value small {
+  margin-top: 5px;
+  font-size: 19px;
+}
+
+.revenue-value strong {
+  font-size: clamp(40px, 4.1vw, 59px);
+}
+
+.hero-revenue h2 {
+  margin-top: 11px;
+  font-size: 13px;
+}
+
+.hero-revenue > p {
+  margin-top: 5px;
+  font-size: 8px;
+}
+
+.confidence-pill {
+  margin-top: 14px;
+  padding: 7px 9px;
+  font-size: 7px;
+}
+
+/* Referanstaki mor enerji dalgası */
+.energy-wave {
+  right: -25px;
+  bottom: -13px;
+  left: -28px;
+  height: 100px;
+  transform: rotate(-3deg);
+}
+
+.wave {
+  border-width: 1.6px;
+  border-color: rgba(139, 73, 255, 0.56);
+  filter:
+    drop-shadow(0 0 5px rgba(140, 75, 255, 0.52))
+    drop-shadow(0 0 16px rgba(91, 33, 182, 0.3));
+}
+
+.wave-one {
+  bottom: 0;
+}
+
+.wave-two {
+  bottom: 15px;
+}
+
+.wave-three {
+  bottom: 30px;
+}
+
+.wave-four {
+  bottom: 44px;
+}
+
+.hero-performance article {
+  min-height: 122px;
+  padding-inline: 7px;
+}
+
+.hero-performance strong {
+  font-size: 17px;
+}
+
+.hero-performance span {
+  margin-top: 7px;
+  font-size: 8px;
+}
+
+.hero-performance b {
+  margin-top: 9px;
+  font-size: 9px;
+}
+
+.hero-performance small {
+  margin-top: 7px;
+  font-size: 6px;
+}
+
+/* Sağ üst iki ayrı kutu */
+.hero-side {
+  gap: 8px;
+  padding: 11px;
+}
+
+.goal-card,
+.opportunity-card {
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.goal-value {
+  margin-top: 9px;
+}
+
+.goal-value strong {
+  font-size: 17px;
+}
+
+.goal-progress-row {
+  margin-top: 9px;
+}
+
+.opportunity-values {
+  margin-top: 10px;
+}
+
+.opportunity-values strong {
+  font-size: 14px;
+}
+
+.opportunity-chart {
+  height: 24px;
+}
+
+/* KPI kartları */
+.metrics-grid {
+  gap: 8px;
+  margin-top: 9px;
+}
+
+.metric-card {
+  min-height: 104px;
+  padding: 10px 12px 8px;
+}
+
+.metric-icon {
+  width: 29px;
+  height: 29px;
+}
+
+.metric-value {
+  margin-top: 6px;
+  font-size: 16px;
+}
+
+.metric-change {
+  margin-top: 4px;
+}
+
+.metric-card > svg {
+  bottom: 6px;
+  height: 23px;
+}
+
+/* Grafik ve sağ öncelikler */
+.analytics-grid {
+  grid-template-columns: minmax(0, 1.49fr) minmax(355px, 0.91fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.dashboard-bottom-grid {
+  grid-template-columns: minmax(0, 1.47fr) minmax(355px, 0.93fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.revenue-chart-card,
+.priorities-card,
+.strategies-card,
+.copilot-card {
+  padding: 11px 12px;
+}
+
+.section-heading h3 {
+  font-size: 10px;
+}
+
+.chart-legend {
+  margin-top: 7px;
+  font-size: 6px;
+}
+
+.revenue-chart-layout {
+  grid-template-columns: minmax(0, 1fr) 105px;
+  gap: 9px;
+  margin-top: 7px;
+}
+
+.revenue-chart-visual > svg {
+  height: 156px;
+}
+
+.chart-summary {
+  padding: 10px;
+}
+
+.chart-summary strong {
+  margin: 3px 0 7px;
+  font-size: 12px;
+}
+
+.priorities-list {
+  margin-top: 7px;
+}
+
+.priorities-list article {
+  min-height: 49px;
+  grid-template-columns: 20px 31px minmax(0, 1fr) auto 14px;
+  gap: 8px;
+}
+
+.priority-rank {
+  width: 18px;
+  height: 18px;
+  font-size: 7px;
+}
+
+.priority-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.priority-copy strong {
+  font-size: 8px;
+}
+
+.priority-copy span,
+.priority-impact span {
+  font-size: 6px;
+}
+
+.priority-impact strong {
+  font-size: 8px;
+}
+
+.recommendations-button {
+  height: 29px;
+  margin-top: 8px;
+}
+
+/* Alt tablolar */
+.strategy-table-header {
+  min-height: 25px;
+}
+
+.strategy-row {
+  min-height: 40px;
+}
+
+.strategy-platform {
+  width: 24px;
+  height: 24px;
+}
+
+.question-chips {
+  gap: 5px;
+  margin-top: 9px;
+}
+
+.question-chips button {
+  padding: 6px 8px;
+  font-size: 6px;
+}
+
+.copilot-form {
+  grid-template-columns: 1fr 34px;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.copilot-form input,
+.copilot-form button {
+  height: 34px;
+}
+
+.copilot-form button {
+  width: 34px;
+}
+
+/* İnce neon detay */
+.dashboard-card:hover {
+  border-color: rgba(139, 92, 246, 0.21);
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(91, 33, 182, 0.07);
+}
+
+/* 16:9 masaüstünde tek ekrana yakın görünüm */
+@media (min-width: 1400px) and (min-aspect-ratio: 16/10) {
+  .dashboard-container {
+    padding-top: 10px;
+  }
+
+  .hero-section {
+    min-height: 218px;
+  }
+
+  .metric-card {
+    min-height: 99px;
+  }
+
+  .revenue-chart-visual > svg {
+    height: 147px;
+  }
+
+  .strategy-row {
+    min-height: 38px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .analytics-grid,
+  .dashboard-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ADLENS_PIXEL_MATCH_END */
