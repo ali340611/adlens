@@ -2265,3 +2265,137 @@ body {
 }
 
 /* ADLENS_PIXEL_MATCH_END */
+
+/* ADLENS PREMIUM VIVID OVERRIDE */
+
+html,
+body {
+  background:
+    radial-gradient(circle at 20% 8%, rgba(124, 58, 237, 0.22), transparent 30%),
+    radial-gradient(circle at 78% 20%, rgba(67, 56, 202, 0.12), transparent 36%),
+    linear-gradient(145deg, #02040d 0%, #05091a 48%, #02050f 100%) !important;
+}
+
+.sidebar {
+  background:
+    radial-gradient(circle at 45% 3%, rgba(139, 92, 246, 0.22), transparent 28%),
+    linear-gradient(180deg, #0a0d22 0%, #060a18 48%, #030713 100%) !important;
+  border-right-color: rgba(139, 92, 246, 0.22) !important;
+  box-shadow: 14px 0 45px rgba(0, 0, 0, 0.35) !important;
+}
+
+.sidebar-item.active {
+  background: linear-gradient(90deg, #6730d7, #8b43ef, #4f209f) !important;
+  border-color: rgba(196, 150, 255, 0.45) !important;
+  box-shadow:
+    0 8px 25px rgba(104, 40, 215, 0.36),
+    0 0 22px rgba(139, 92, 246, 0.2) !important;
+}
+
+.topbar {
+  background: rgba(3, 7, 18, 0.94) !important;
+  border-bottom-color: rgba(126, 150, 205, 0.15) !important;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.24) !important;
+  backdrop-filter: blur(24px) saturate(150%);
+}
+
+.dashboard-card {
+  border-color: rgba(123, 148, 200, 0.18) !important;
+  background:
+    radial-gradient(circle at 5% 0%, rgba(105, 55, 205, 0.11), transparent 31%),
+    linear-gradient(145deg, rgba(10, 20, 41, 0.99), rgba(4, 11, 24, 0.99)) !important;
+  box-shadow:
+    0 16px 44px rgba(0, 0, 0, 0.3),
+    inset 0 1px rgba(255, 255, 255, 0.03) !important;
+}
+
+.hero-section {
+  border-color: rgba(141, 92, 246, 0.28) !important;
+  background:
+    radial-gradient(circle at 24% 47%, rgba(111, 50, 221, 0.22), transparent 38%),
+    linear-gradient(115deg, #0d102d, #081225 53%, #06101e) !important;
+}
+
+.hero-revenue {
+  background:
+    radial-gradient(ellipse at 35% 87%, rgba(141, 58, 255, 0.43), transparent 44%),
+    linear-gradient(135deg, rgba(57, 24, 119, 0.5), transparent 69%) !important;
+}
+
+.revenue-value strong {
+  color: #fff !important;
+  text-shadow:
+    0 0 20px rgba(255, 255, 255, 0.08),
+    0 0 40px rgba(139, 92, 246, 0.18);
+}
+
+.wave {
+  border-color: rgba(177, 93, 255, 0.72) !important;
+  border-width: 2px !important;
+  filter:
+    drop-shadow(0 0 6px rgba(195, 115, 255, 0.82))
+    drop-shadow(0 0 18px rgba(124, 58, 237, 0.62))
+    drop-shadow(0 0 36px rgba(91, 33, 182, 0.3)) !important;
+}
+
+.wave-light {
+  box-shadow:
+    0 0 8px #fff,
+    0 0 20px #d5a5ff,
+    0 0 42px #9b5cff,
+    0 0 70px #6d28d9 !important;
+}
+
+.metric-card {
+  background:
+    radial-gradient(circle at 18% 20%, rgba(91, 52, 170, 0.13), transparent 32%),
+    linear-gradient(145deg, #0b162d, #050c1c) !important;
+}
+
+.metric-card polyline {
+  stroke-width: 2.3px !important;
+  filter: drop-shadow(0 0 5px currentColor) !important;
+}
+
+.violet-line {
+  stroke: #a15bff !important;
+  stroke-width: 3px !important;
+  filter: drop-shadow(0 0 6px rgba(161, 91, 255, 0.8)) !important;
+}
+
+.green-line {
+  stroke: #18f29a !important;
+  stroke-width: 3px !important;
+  filter: drop-shadow(0 0 6px rgba(24, 242, 154, 0.72)) !important;
+}
+
+.goal-progress > span,
+.new-strategy-button,
+.recommendations-button,
+.premium-panel > button {
+  background: linear-gradient(90deg, #6527d5, #984cf5, #7429e9) !important;
+  box-shadow:
+    0 8px 22px rgba(109, 40, 217, 0.32),
+    0 0 20px rgba(139, 92, 246, 0.2) !important;
+}
+
+.opportunity-chart polyline {
+  stroke: #b35cff !important;
+  stroke-width: 2.4px !important;
+  filter: drop-shadow(0 0 7px rgba(179, 92, 255, 0.7)) !important;
+}
+
+.question-chips button {
+  background: linear-gradient(
+    180deg,
+    rgba(92, 45, 165, 0.38),
+    rgba(45, 25, 91, 0.28)
+  ) !important;
+  border-color: rgba(173, 108, 255, 0.28) !important;
+  color: #cbbce3 !important;
+}
+
+.copilot-form button {
+  background: linear-gradient(145deg, #a05cff, #6d2edb) !important;
+  box-shadow: 0 0 20px rgba(155, 92, 255, 0.24) !important;
+}
