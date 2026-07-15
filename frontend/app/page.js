@@ -32,331 +32,172 @@ import {
   Users,
   WandSparkles,
   X,
-  Zap,
 } from "lucide-react";
 
 import {
-  SiAmazon,
-  SiFacebook,
-  SiGoogle,
   SiGoogleads,
   SiGoogleanalytics,
-  SiHubspot,
-  SiInstagram,
-  SiKlaviyo,
-  SiLinkedin,
-  SiMailchimp,
   SiMeta,
-  SiMicrosoft,
-  SiPinterest,
-  SiReddit,
-  SiSalesforce,
   SiShopify,
-  SiSnapchat,
-  SiSpotify,
-  SiSquarespace,
   SiTiktok,
-  SiWix,
-  SiWoocommerce,
-  SiWordpress,
-  SiX,
-  SiYoutube,
 } from "react-icons/si";
 
-const navGroups = [
+const NAVIGATION = [
   {
     title: "Workspace",
     items: [
-      ["Dashboard", LayoutDashboard, true],
-      ["Strategies", WandSparkles],
-      ["Campaigns", Rocket],
-      ["AI Intelligence", Sparkles, false, "New"],
-      ["Competitors", Users],
-      ["Website Analyzer", Gauge],
-      ["Audience Builder", Target],
-      ["Creative Studio", ImageIcon],
-      ["Reports", BarChart3],
-      ["Settings", Settings],
+      { label: "Dashboard", icon: LayoutDashboard, active: true },
+      { label: "Strategies", icon: WandSparkles },
+      { label: "Campaigns", icon: Rocket },
+      {
+        label: "AI Intelligence",
+        icon: Sparkles,
+        badge: "New",
+      },
+      { label: "Competitors", icon: Users },
+      { label: "Website Analyzer", icon: Gauge },
+      { label: "Audience Builder", icon: Target },
+      { label: "Creative Studio", icon: ImageIcon },
+      { label: "Reports", icon: BarChart3 },
+      { label: "Settings", icon: Settings },
     ],
   },
   {
     title: "AI Tools",
     items: [
-      ["AI Copilot", Bot, false, "Beta"],
-      ["Ad Copy Generator", MessageSquareText],
-      ["Creative Generator", WandSparkles],
-      ["Budget Simulator", CircleDollarSign],
+      { label: "AI Copilot", icon: Bot, badge: "Beta" },
+      { label: "Ad Copy Generator", icon: MessageSquareText },
+      { label: "Creative Generator", icon: WandSparkles },
+      { label: "Budget Simulator", icon: CircleDollarSign },
     ],
   },
 ];
 
-const connectedPlatforms = [
+const CONNECTED_PLATFORMS = [
   {
-    name: "Google Ads",
-    Icon: SiGoogleads,
-    className: "googleAds",
+    label: "Google Ads",
+    icon: SiGoogleads,
+    className: "google-ads",
   },
   {
-    name: "Meta Ads",
-    Icon: SiMeta,
-    className: "metaAds",
+    label: "Meta Ads",
+    icon: SiMeta,
+    className: "meta-ads",
   },
   {
-    name: "Shopify",
-    Icon: SiShopify,
+    label: "Shopify",
+    icon: SiShopify,
     className: "shopify",
   },
   {
-    name: "GA4",
-    Icon: SiGoogleanalytics,
+    label: "GA4",
+    icon: SiGoogleanalytics,
     className: "analytics",
   },
 ];
 
-const marketingPlatforms = [
-  {
-    name: "Google Ads",
-    Icon: SiGoogleads,
-    className: "googleAds",
-    category: "Advertising",
-  },
-  {
-    name: "Meta Ads",
-    Icon: SiMeta,
-    className: "metaAds",
-    category: "Advertising",
-  },
-  {
-    name: "Facebook",
-    Icon: SiFacebook,
-    className: "facebook",
-    category: "Social",
-  },
-  {
-    name: "Instagram",
-    Icon: SiInstagram,
-    className: "instagram",
-    category: "Social",
-  },
-  {
-    name: "TikTok Ads",
-    Icon: SiTiktok,
-    className: "tiktok",
-    category: "Advertising",
-  },
-  {
-    name: "YouTube Ads",
-    Icon: SiYoutube,
-    className: "youtube",
-    category: "Advertising",
-  },
-  {
-    name: "LinkedIn Ads",
-    Icon: SiLinkedin,
-    className: "linkedin",
-    category: "Advertising",
-  },
-  {
-    name: "Pinterest Ads",
-    Icon: SiPinterest,
-    className: "pinterest",
-    category: "Advertising",
-  },
-  {
-    name: "Snapchat Ads",
-    Icon: SiSnapchat,
-    className: "snapchat",
-    category: "Advertising",
-  },
-  {
-    name: "X Ads",
-    Icon: SiX,
-    className: "x",
-    category: "Advertising",
-  },
-  {
-    name: "Reddit Ads",
-    Icon: SiReddit,
-    className: "reddit",
-    category: "Advertising",
-  },
-  {
-    name: "Spotify Ads",
-    Icon: SiSpotify,
-    className: "spotify",
-    category: "Advertising",
-  },
-  {
-    name: "Microsoft Ads",
-    Icon: SiMicrosoft,
-    className: "microsoft",
-    category: "Advertising",
-  },
-  {
-    name: "Amazon Ads",
-    Icon: SiAmazon,
-    className: "amazon",
-    category: "Advertising",
-  },
-  {
-    name: "Google Analytics",
-    Icon: SiGoogleanalytics,
-    className: "analytics",
-    category: "Analytics",
-  },
-  {
-    name: "Google",
-    Icon: SiGoogle,
-    className: "google",
-    category: "Analytics",
-  },
-  {
-    name: "Shopify",
-    Icon: SiShopify,
-    className: "shopify",
-    category: "E-commerce",
-  },
-  {
-    name: "WooCommerce",
-    Icon: SiWoocommerce,
-    className: "woocommerce",
-    category: "E-commerce",
-  },
-  {
-    name: "WordPress",
-    Icon: SiWordpress,
-    className: "wordpress",
-    category: "E-commerce",
-  },
-  {
-    name: "Wix",
-    Icon: SiWix,
-    className: "wix",
-    category: "E-commerce",
-  },
-  {
-    name: "Squarespace",
-    Icon: SiSquarespace,
-    className: "squarespace",
-    category: "E-commerce",
-  },
-  {
-    name: "Mailchimp",
-    Icon: SiMailchimp,
-    className: "mailchimp",
-    category: "Email",
-  },
-  {
-    name: "Klaviyo",
-    Icon: SiKlaviyo,
-    className: "klaviyo",
-    category: "Email",
-  },
-  {
-    name: "HubSpot",
-    Icon: SiHubspot,
-    className: "hubspot",
-    category: "CRM",
-  },
-  {
-    name: "Salesforce",
-    Icon: SiSalesforce,
-    className: "salesforce",
-    category: "CRM",
-  },
-];
-
-const metrics = [
+const METRICS = [
   {
     label: "Revenue",
     value: "$24,540",
     change: "↑ 18.6%",
+    description: "vs last 30 days",
     icon: CircleDollarSign,
     tone: "purple",
-    chart:
-      "3,27 15,25 27,26 39,20 51,23 63,17 75,19 87,12 99,15 111,8",
+    points:
+      "2,27 13,25 24,27 35,21 46,23 57,18 68,20 79,14 90,17 101,10 112,12 124,6",
   },
   {
     label: "ROAS",
     value: "3.80x",
     change: "↑ 15.3%",
+    description: "vs last 30 days",
     icon: TrendingUp,
     tone: "green",
-    chart:
-      "3,28 15,26 27,25 39,22 51,23 63,18 75,19 87,14 99,12 111,7",
+    points:
+      "2,28 13,26 24,25 35,22 46,24 57,18 68,20 79,15 90,14 101,10 112,11 124,6",
   },
   {
     label: "Ad Spend",
     value: "$6,452",
     change: "↑ 12.4%",
+    description: "vs last 30 days",
     icon: Activity,
     tone: "blue",
-    chart:
-      "3,29 15,27 27,25 39,26 51,20 63,22 75,16 87,18 99,12 111,8",
+    points:
+      "2,29 13,27 24,25 35,26 46,20 57,22 68,16 79,18 90,13 101,15 112,9 124,7",
   },
   {
     label: "CTR",
     value: "2.45%",
     change: "↑ 8.7%",
+    description: "vs last 30 days",
     icon: MousePointerClick,
     tone: "purple",
-    chart:
-      "3,28 15,24 27,26 39,20 51,22 63,16 75,18 87,11 99,14 111,7",
+    points:
+      "2,28 13,24 24,26 35,20 46,22 57,16 68,18 79,11 90,14 101,9 112,11 124,5",
   },
   {
     label: "CPC",
     value: "$0.68",
     change: "↓ 9.2%",
+    description: "vs last 30 days",
     icon: Search,
     tone: "orange",
-    chart:
-      "3,12 15,15 27,13 39,18 51,16 63,21 75,19 87,23 99,21 111,27",
     negative: true,
+    points:
+      "2,11 13,15 24,13 35,18 46,16 57,21 68,19 79,23 90,21 101,25 112,23 124,28",
   },
   {
     label: "CPA",
     value: "$18.72",
     change: "↓ 11.9%",
+    description: "vs last 30 days",
     icon: Users,
     tone: "yellow",
-    chart:
-      "3,13 15,16 27,14 39,19 51,17 63,22 75,20 87,24 99,22 111,27",
     negative: true,
+    points:
+      "2,12 13,16 24,14 35,19 46,17 57,22 68,20 79,24 90,22 101,26 112,24 124,28",
   },
 ];
 
-const priorities = [
+const PRIORITIES = [
   {
     rank: 1,
     title: "Fix Landing Page Speed",
-    subtitle: "Potential revenue increase",
+    description: "Potential revenue increase",
     impact: "High Impact",
-    revenue: "+$2,420",
+    value: "+$2,420",
     icon: Rocket,
+    type: "lucide",
   },
   {
     rank: 2,
     title: "Launch TikTok Campaign",
-    subtitle: "Potential revenue increase",
+    description: "Potential revenue increase",
     impact: "High Impact",
-    revenue: "+$1,890",
-    BrandIcon: SiTiktok,
+    value: "+$1,890",
+    icon: SiTiktok,
+    type: "brand",
+    className: "tiktok",
   },
   {
     rank: 3,
     title: "Increase Google Ads Budget",
-    subtitle: "Potential revenue increase",
+    description: "Potential revenue increase",
     impact: "Medium Impact",
-    revenue: "+$1,350",
-    BrandIcon: SiGoogleads,
+    value: "+$1,350",
+    icon: SiGoogleads,
+    type: "brand",
+    className: "google",
   },
 ];
 
-const strategies = [
+const STRATEGIES = [
   {
-    Icon: SiMeta,
-    className: "meta",
     title: "E-commerce Growth Strategy",
+    icon: SiMeta,
+    className: "meta",
     flag: "🇺🇸",
     country: "United States",
     budget: "$2,500",
@@ -365,9 +206,9 @@ const strategies = [
     created: "2 days ago",
   },
   {
-    Icon: SiTiktok,
-    className: "tiktok",
     title: "TikTok Scaling Strategy",
+    icon: SiTiktok,
+    className: "tiktok",
     flag: "🇬🇧",
     country: "United Kingdom",
     budget: "£1,800",
@@ -376,9 +217,9 @@ const strategies = [
     created: "5 days ago",
   },
   {
-    Icon: SiGoogleads,
-    className: "google",
     title: "Google Ads Optimization",
+    icon: SiGoogleads,
+    className: "google",
     flag: "🇩🇪",
     country: "Germany",
     budget: "€1,200",
@@ -388,7 +229,7 @@ const strategies = [
   },
 ];
 
-const countries = [
+const COUNTRIES = [
   {
     code: "US",
     flag: "🇺🇸",
@@ -432,13 +273,6 @@ const countries = [
     symbol: "€",
   },
   {
-    code: "NL",
-    flag: "🇳🇱",
-    name: "Netherlands",
-    currency: "EUR",
-    symbol: "€",
-  },
-  {
     code: "TR",
     flag: "🇹🇷",
     name: "Türkiye",
@@ -451,13 +285,6 @@ const countries = [
     name: "United Arab Emirates",
     currency: "AED",
     symbol: "د.إ",
-  },
-  {
-    code: "SA",
-    flag: "🇸🇦",
-    name: "Saudi Arabia",
-    currency: "SAR",
-    symbol: "﷼",
   },
   {
     code: "CA",
@@ -481,45 +308,24 @@ const countries = [
     symbol: "¥",
   },
   {
-    code: "KR",
-    flag: "🇰🇷",
-    name: "South Korea",
-    currency: "KRW",
-    symbol: "₩",
-  },
-  {
     code: "IN",
     flag: "🇮🇳",
     name: "India",
     currency: "INR",
     symbol: "₹",
   },
-  {
-    code: "BR",
-    flag: "🇧🇷",
-    name: "Brazil",
-    currency: "BRL",
-    symbol: "R$",
-  },
-  {
-    code: "MX",
-    flag: "🇲🇽",
-    name: "Mexico",
-    currency: "MXN",
-    symbol: "MX$",
-  },
 ];
 
-function Brand() {
+function Logo() {
   return (
     <div className="brand">
-      <div className="brandMark">
-        <span />
-        <span />
-        <b>A</b>
+      <div className="brand-logo">
+        <span className="brand-orbit brand-orbit-one" />
+        <span className="brand-orbit brand-orbit-two" />
+        <strong>A</strong>
       </div>
 
-      <div className="brandCopy">
+      <div className="brand-text">
         <strong>AdLens</strong>
         <small>AI Marketing Intelligence</small>
       </div>
@@ -532,68 +338,76 @@ function Sidebar({ open, onClose }) {
     <>
       <button
         type="button"
-        className={`overlay ${open ? "show" : ""}`}
+        className={`mobile-overlay ${open ? "visible" : ""}`}
         onClick={onClose}
-        aria-label="Close menu"
+        aria-label="Close navigation"
       />
 
-      <aside className={`sidebar ${open ? "open" : ""}`}>
-        <div className="sidebarTop">
-          <Brand />
+      <aside className={`sidebar ${open ? "sidebar-open" : ""}`}>
+        <div className="sidebar-header">
+          <Logo />
 
           <button
             type="button"
-            className="iconButton closeMenu"
+            className="icon-button sidebar-close"
             onClick={onClose}
-            aria-label="Close navigation"
+            aria-label="Close menu"
           >
-            <X size={17} />
+            <X size={18} />
           </button>
         </div>
 
-        <div className="sidebarBody">
-          {navGroups.map((group) => (
-            <section className="navGroup" key={group.title}>
-              <span className="navTitle">{group.title}</span>
+        <div className="sidebar-scroll">
+          {NAVIGATION.map((group) => (
+            <section className="navigation-group" key={group.title}>
+              <span className="navigation-title">{group.title}</span>
 
-              {group.items.map(([label, Icon, active, badge]) => (
-                <button
-                  type="button"
-                  className={`navItem ${active ? "active" : ""}`}
-                  key={label}
-                >
-                  <Icon size={16} strokeWidth={1.9} />
+              <div className="navigation-items">
+                {group.items.map((item) => {
+                  const Icon = item.icon;
 
-                  <span>{label}</span>
+                  return (
+                    <button
+                      type="button"
+                      className={`navigation-item ${
+                        item.active ? "navigation-active" : ""
+                      }`}
+                      key={item.label}
+                    >
+                      <Icon size={17} strokeWidth={1.9} />
 
-                  {badge && <small>{badge}</small>}
-                </button>
-              ))}
+                      <span>{item.label}</span>
+
+                      {item.badge && <small>{item.badge}</small>}
+                    </button>
+                  );
+                })}
+              </div>
             </section>
           ))}
 
-          <div className="premiumCard">
-            <div className="premiumHead">
+          <div className="premium-card">
+            <div className="premium-title">
               <span>
-                <Crown size={18} />
+                <Crown size={19} />
               </span>
 
               <strong>Go Premium</strong>
             </div>
 
             <p>
-              Unlock the full power of AdLens with unlimited strategies,
+              Unlock full AdLens intelligence, unlimited strategies,
               advanced insights and priority support.
             </p>
 
             <button type="button">
               Upgrade Plan
-              <ChevronRight size={15} />
+              <ChevronRight size={16} />
             </button>
           </div>
         </div>
 
-        <div className="sidebarUser">
+        <div className="sidebar-profile">
           <div className="avatar">MA</div>
 
           <div>
@@ -608,15 +422,15 @@ function Sidebar({ open, onClose }) {
   );
 }
 
-function Topbar({ onMenu, onNewStrategy }) {
+function Topbar({ onOpenSidebar, onOpenStrategy }) {
   return (
     <header className="topbar">
-      <div className="welcomeWrap">
+      <div className="welcome">
         <button
           type="button"
-          className="iconButton menuButton"
-          onClick={onMenu}
-          aria-label="Open navigation"
+          className="icon-button mobile-menu"
+          onClick={onOpenSidebar}
+          aria-label="Open menu"
         >
           <Menu size={20} />
         </button>
@@ -625,57 +439,63 @@ function Topbar({ onMenu, onNewStrategy }) {
           <h1>
             Good evening, Muhammed! <span>👋</span>
           </h1>
-
           <p>Your business is outperforming 87% of similar businesses.</p>
         </div>
       </div>
 
-      <div className="topActions">
-        <button type="button" className="ghostButton dateButton">
-          <CalendarDays size={15} />
+      <div className="topbar-actions">
+        <button type="button" className="secondary-button date-button">
+          <CalendarDays size={16} />
           May 6 – Jun 5, 2026
-          <ChevronDown size={13} />
+          <ChevronDown size={14} />
         </button>
 
-        <button type="button" className="ghostButton exportButton">
-          <Download size={15} />
+        <button type="button" className="secondary-button export-button">
+          <Download size={16} />
           Export Report
         </button>
 
         <button
           type="button"
-          className="primaryButton"
-          onClick={onNewStrategy}
+          className="primary-button"
+          onClick={onOpenStrategy}
         >
-          <Plus size={16} />
+          <Plus size={17} />
           New Strategy
         </button>
 
         <button
           type="button"
-          className="iconButton notify"
+          className="icon-button notification-button"
           aria-label="Notifications"
         >
-          <Bell size={18} />
+          <Bell size={19} />
           <i>3</i>
         </button>
 
-        <div className="connections">
-          {connectedPlatforms.map(({ name, Icon, className }) => (
-            <div className={`connection ${className}`} key={name}>
-              <b>
-                <Icon size={16} />
-              </b>
+        <div className="platform-connections">
+          {CONNECTED_PLATFORMS.map((platform) => {
+            const Icon = platform.icon;
 
-              <span>
-                {name}
-                <small>Connected</small>
-              </span>
-            </div>
-          ))}
+            return (
+              <div
+                className={`platform-connection ${platform.className}`}
+                key={platform.label}
+              >
+                <span>
+                  <Icon size={18} />
+                </span>
+
+                <div>
+                  <strong>{platform.label}</strong>
+                  <small>Connected</small>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
-        <button type="button" className="profileButton">
+        <button type="button" className="profile-menu">
           <div className="avatar">MA</div>
           <ChevronDown size={14} />
         </button>
@@ -684,21 +504,85 @@ function Topbar({ onMenu, onNewStrategy }) {
   );
 }
 
-function Hero() {
+function HeroWave() {
   return (
-    <section className="hero shellCard">
-      <div className="heroRevenue">
-        <div className="heroPills">
+    <svg
+      className="hero-wave"
+      viewBox="0 0 620 180"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="heroLine" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#5b21b6" stopOpacity="0" />
+          <stop offset="35%" stopColor="#8b5cf6" stopOpacity="0.8" />
+          <stop offset="54%" stopColor="#d26cff" />
+          <stop offset="100%" stopColor="#6d28d9" stopOpacity="0" />
+        </linearGradient>
+
+        <radialGradient id="heroLight">
+          <stop offset="0%" stopColor="#ffffff" />
+          <stop offset="18%" stopColor="#f0d6ff" />
+          <stop offset="45%" stopColor="#a855f7" stopOpacity="0.75" />
+          <stop offset="100%" stopColor="#7c3aed" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      <path d="M-20 142 C95 145 146 81 248 99 C346 117 380 44 474 79 C535 102 567 121 650 105" />
+      <path d="M-20 151 C95 143 158 98 251 106 C351 115 393 61 481 89 C536 107 577 117 650 108" />
+      <path d="M-20 159 C92 151 168 121 258 115 C355 108 418 82 495 102 C551 117 590 116 650 108" />
+      <path d="M-20 167 C105 160 177 140 277 124 C374 108 441 102 512 112 C565 120 605 116 650 110" />
+
+      <circle cx="255" cy="99" r="30" fill="url(#heroLight)" />
+      <circle cx="255" cy="99" r="4" fill="#ffffff" />
+      <circle cx="474" cy="79" r="3" fill="#e9d5ff" />
+      <circle cx="390" cy="67" r="2" fill="#c084fc" />
+    </svg>
+  );
+}
+
+function Hero() {
+  const statistics = [
+    {
+      value: "+$7,180",
+      title: "Estimated Profit",
+      change: "↑ 68%",
+      comparison: "vs Apr 5 – May 5",
+    },
+    {
+      value: "146x",
+      title: "ROI",
+      change: "$148.58 per $1 spent",
+      comparison: "",
+    },
+    {
+      value: "-$12.68",
+      title: "Lower CPA",
+      change: "↓ 31%",
+      comparison: "vs Apr 5 – May 5",
+    },
+    {
+      value: "+72%",
+      title: "Revenue Growth",
+      change: "↑ 72%",
+      comparison: "vs Apr 5 – May 5",
+    },
+  ];
+
+  return (
+    <section className="hero-card">
+      <div className="hero-revenue">
+        <div className="hero-badges">
           <span>Since joining AdLens</span>
 
           <span>
-            <ShieldCheck size={13} />
+            <ShieldCheck size={14} />
             Business Health
-            <b>87/100</b>
+            <strong>87/100</strong>
           </span>
         </div>
 
-        <div className="heroAmount">
+        <div className="revenue-number">
           <small>+</small>
           <strong>$10,340</strong>
         </div>
@@ -706,110 +590,73 @@ function Hero() {
         <h2>Revenue Generated</h2>
         <p>Since you joined on May 6, 2026</p>
 
-        <div className="confidence">
-          <Lightbulb size={14} />
+        <div className="confidence-badge">
+          <Lightbulb size={15} />
           AI Confidence Average: 94%
         </div>
 
-        <svg
-          className="heroWave"
-          viewBox="0 0 560 160"
-          preserveAspectRatio="none"
-        >
-          <defs>
-            <linearGradient
-              id="waveStroke"
-              x1="0"
-              y1="0"
-              x2="1"
-              y2="0"
-            >
-              <stop offset="0" stopColor="#6d28d9" stopOpacity="0" />
-              <stop offset=".48" stopColor="#c266ff" />
-              <stop offset="1" stopColor="#7c3aed" stopOpacity=".15" />
-            </linearGradient>
-
-            <radialGradient id="waveGlow">
-              <stop offset="0" stopColor="#ffffff" />
-              <stop offset=".25" stopColor="#e9d5ff" />
-              <stop offset="1" stopColor="#a855f7" stopOpacity="0" />
-            </radialGradient>
-          </defs>
-
-          <path d="M0 130 C110 128 155 76 252 94 C327 108 362 42 448 76 C502 98 525 118 560 110" />
-
-          <path d="M0 142 C95 134 162 90 245 100 C330 112 378 55 455 86 C500 104 532 112 560 108" />
-
-          <path d="M0 150 C108 140 166 110 250 108 C330 107 394 76 467 98 C507 110 538 112 560 109" />
-
-          <circle cx="253" cy="94" r="22" fill="url(#waveGlow)" />
-          <circle cx="253" cy="94" r="3.5" fill="#ffffff" />
-          <circle cx="447" cy="76" r="2.5" fill="#d8b4fe" />
-        </svg>
+        <HeroWave />
       </div>
 
-      <div className="heroStats">
-        {[
-          ["+$7,180", "Estimated Profit", "↑ 68%", "vs Apr 5 – May 5"],
-          ["146x", "ROI", "$148.58 per $1 spent", ""],
-          ["-$12.68", "Lower CPA", "↓ 31%", "vs Apr 5 – May 5"],
-          ["+72%", "Revenue Growth", "↑ 72%", "vs Apr 5 – May 5"],
-        ].map(([value, label, change, meta]) => (
-          <article key={label}>
-            <strong>{value}</strong>
-            <span>{label}</span>
-            <b>{change}</b>
-            {meta && <small>{meta}</small>}
+      <div className="hero-statistics">
+        {statistics.map((statistic) => (
+          <article key={statistic.title}>
+            <strong>{statistic.value}</strong>
+            <span>{statistic.title}</span>
+            <b>{statistic.change}</b>
+
+            {statistic.comparison && (
+              <small>{statistic.comparison}</small>
+            )}
           </article>
         ))}
       </div>
 
-      <div className="heroSide">
-        <article className="miniPanel goalPanel">
-          <div>
-            <span>Monthly Goal</span>
+      <div className="hero-side">
+        <article className="goal-card">
+          <div className="card-label-row">
+            <strong>Monthly Goal</strong>
             <button type="button">Edit Goal</button>
           </div>
 
-          <p>
+          <div className="goal-value">
             <strong>$24,540</strong>
-            <small>/ $50,000</small>
-          </p>
+            <span>/ $50,000</span>
+          </div>
 
-          <div className="progressRow">
+          <div className="goal-progress">
             <span>
               <i />
             </span>
-
-            <b>49%</b>
+            <strong>49%</strong>
           </div>
 
           <small>22 days left in this month</small>
         </article>
 
-        <article className="miniPanel opportunityPanel">
-          <div>
-            <span>
-              Opportunity Score <i>i</i>
-            </span>
-
-            <Lightbulb size={15} />
+        <article className="opportunity-card">
+          <div className="card-label-row">
+            <strong>
+              Opportunity Score
+              <i>i</i>
+            </strong>
+            <Lightbulb size={16} />
           </div>
 
-          <div className="oppValues">
-            <p>
+          <div className="opportunity-values">
+            <div>
               <small>Potential Revenue</small>
               <strong>$39,800</strong>
-            </p>
+            </div>
 
-            <p>
+            <div>
               <small>Opportunity Left</small>
               <strong>+$15,260</strong>
-            </p>
+            </div>
           </div>
 
-          <svg viewBox="0 0 200 30" preserveAspectRatio="none">
-            <polyline points="0,20 12,17 24,21 36,16 48,19 60,15 72,19 84,14 96,16 108,11 120,14 132,9 144,12 156,7 168,10 180,5 200,7" />
+          <svg viewBox="0 0 220 34" preserveAspectRatio="none">
+            <polyline points="0,23 12,19 24,22 36,17 48,20 60,16 72,20 84,15 96,17 108,12 120,15 132,10 144,13 156,8 168,11 180,6 198,9 220,5" />
           </svg>
         </article>
       </div>
@@ -821,27 +668,25 @@ function MetricCard({ metric }) {
   const Icon = metric.icon;
 
   return (
-    <article className={`metricCard shellCard ${metric.tone}`}>
-      <div className="metricTop">
-        <span className="metricIcon">
-          <Icon size={18} />
+    <article className={`metric-card metric-${metric.tone}`}>
+      <div className="metric-title">
+        <span>
+          <Icon size={20} />
         </span>
-
-        <span>{metric.label}</span>
+        <small>{metric.label}</small>
       </div>
 
-      <strong>{metric.value}</strong>
+      <strong className="metric-value">{metric.value}</strong>
 
-      <p>
-        <b className={metric.negative ? "negative" : ""}>
+      <div className="metric-comparison">
+        <strong className={metric.negative ? "metric-negative" : ""}>
           {metric.change}
-        </b>
+        </strong>
+        <small>{metric.description}</small>
+      </div>
 
-        <small>vs last 30 days</small>
-      </p>
-
-      <svg viewBox="0 0 114 32" preserveAspectRatio="none">
-        <polyline points={metric.chart} />
+      <svg viewBox="0 0 126 34" preserveAspectRatio="none">
+        <polyline points={metric.points} />
       </svg>
     </article>
   );
@@ -849,140 +694,144 @@ function MetricCard({ metric }) {
 
 function RevenueChart() {
   const purplePoints = [
-    [18, 135],
-    [60, 118],
-    [100, 105],
-    [145, 110],
-    [185, 92],
-    [225, 80],
-    [265, 84],
-    [305, 68],
-    [345, 62],
-    [385, 48],
-    [425, 54],
-    [465, 45],
-    [505, 30],
-    [545, 36],
-    [585, 24],
-    [625, 12],
-    [670, 5],
+    [20, 137],
+    [62, 119],
+    [102, 105],
+    [144, 111],
+    [186, 92],
+    [228, 80],
+    [270, 85],
+    [312, 68],
+    [354, 61],
+    [396, 48],
+    [438, 54],
+    [480, 44],
+    [522, 30],
+    [564, 36],
+    [606, 24],
+    [648, 12],
+    [688, 6],
   ];
 
   const greenPoints = [
-    [18, 154],
-    [60, 148],
-    [100, 143],
-    [145, 137],
-    [185, 127],
-    [225, 120],
-    [265, 112],
-    [305, 105],
-    [345, 98],
-    [385, 84],
-    [425, 86],
-    [465, 77],
-    [505, 63],
-    [545, 58],
-    [585, 46],
-    [625, 34],
-    [670, 21],
+    [20, 155],
+    [62, 149],
+    [102, 144],
+    [144, 138],
+    [186, 128],
+    [228, 120],
+    [270, 113],
+    [312, 105],
+    [354, 98],
+    [396, 84],
+    [438, 86],
+    [480, 77],
+    [522, 63],
+    [564, 58],
+    [606, 46],
+    [648, 34],
+    [688, 21],
   ];
 
   return (
-    <section className="chartCard shellCard">
-      <div className="sectionHead">
+    <section className="dashboard-card revenue-chart-card">
+      <div className="section-heading">
         <div>
           <h3>
             Revenue Impact Over Time <i>i</i>
           </h3>
 
-          <p className="legend">
+          <div className="chart-legend">
             <span>
-              <b className="dash" />
+              <i className="legend-baseline" />
               Without AdLens
             </span>
 
             <span>
-              <b className="dot purpleDot" />
+              <i className="legend-purple" />
               With AdLens
             </span>
 
             <span>
-              <b className="dot greenDot" />
+              <i className="legend-green" />
               AdLens-attributed uplift
             </span>
-          </p>
+          </div>
         </div>
 
         <button type="button">
           Last 30 days
-          <ChevronDown size={13} />
+          <ChevronDown size={14} />
         </button>
       </div>
 
-      <div className="chartBody">
-        <div>
-          <svg viewBox="0 0 690 205" preserveAspectRatio="none">
-            {[35, 77, 119, 161].map((y) => (
+      <div className="chart-content">
+        <div className="chart-area">
+          <svg viewBox="0 0 710 210" preserveAspectRatio="none">
+            {[38, 80, 122, 164].map((y) => (
               <line
                 key={y}
+                className="chart-grid-line"
                 x1="0"
                 y1={y}
-                x2="690"
+                x2="710"
                 y2={y}
-                className="gridLine"
               />
             ))}
 
             <line
-              x1="185"
-              y1="12"
-              x2="185"
-              y2="190"
-              className="started"
+              className="chart-start-line"
+              x1="190"
+              y1="13"
+              x2="190"
+              y2="191"
             />
 
-            <text x="135" y="18">
+            <text x="135" y="19">
               Started using AdLens
             </text>
 
             <polyline
-              className="baselineLine"
-              points="18,154 60,148 100,145 145,140 185,138 225,136 265,134 305,131 345,129 385,126 425,122 465,119 505,116 545,112 585,107 625,102 670,96"
+              className="chart-baseline"
+              points="20,155 62,149 102,146 144,141 186,139 228,137 270,135 312,132 354,130 396,127 438,123 480,120 522,117 564,113 606,108 648,103 688,97"
             />
 
             <polyline
-              className="purpleLine"
-              points={purplePoints.map((point) => point.join(",")).join(" ")}
+              className="chart-purple-line"
+              points={purplePoints
+                .map((point) => point.join(","))
+                .join(" ")}
             />
 
             <polyline
-              className="greenLine"
-              points={greenPoints.map((point) => point.join(",")).join(" ")}
+              className="chart-green-line"
+              points={greenPoints
+                .map((point) => point.join(","))
+                .join(" ")}
             />
 
             {purplePoints.map(([x, y]) => (
               <circle
                 key={`purple-${x}`}
+                className="chart-purple-point"
                 cx={x}
                 cy={y}
-                r="3.5"
-                className="purplePoint"
+                r="3.7"
               />
             ))}
 
             {greenPoints.map(([x, y]) => (
               <circle
                 key={`green-${x}`}
+                className="chart-green-point"
                 cx={x}
                 cy={y}
-                r="3.5"
-                className="greenPoint"
+                r="3.7"
               />
             ))}
           </svg>
 
-          <div className="axis">
+          <div className="chart-axis">
             <span>May 6</span>
             <span>May 13</span>
             <span>May 20</span>
@@ -991,21 +840,20 @@ function RevenueChart() {
           </div>
         </div>
 
-        <aside>
-          <span>With AdLens</span>
-          <strong className="purpleText">$24,540</strong>
+        <aside className="chart-summary">
+          <small>With AdLens</small>
+          <strong className="purple-value">$24,540</strong>
 
-          <span>Without AdLens</span>
+          <small>Without AdLens</small>
           <strong>$17,360</strong>
 
-          <span>Difference</span>
-          <strong className="greenText">+$7,180</strong>
-
+          <small>Difference</small>
+          <strong className="green-value">+$7,180</strong>
           <b>(+41.4%)</b>
         </aside>
       </div>
 
-      <button type="button" className="textButton">
+      <button type="button" className="link-button">
         View Detailed Analytics
         <ChevronRight size={14} />
       </button>
@@ -1013,67 +861,55 @@ function RevenueChart() {
   );
 }
 
-function PriorityIcon({ priority }) {
-  if (priority.BrandIcon) {
-    const BrandIcon = priority.BrandIcon;
-
-    return (
-      <span
-        className={`priorityIcon brandPriority brandPriority${priority.rank}`}
-      >
-        <BrandIcon size={18} />
-      </span>
-    );
-  }
-
-  const Icon = priority.icon;
-
-  return (
-    <span className="priorityIcon">
-      <Icon size={18} />
-    </span>
-  );
-}
-
 function Priorities() {
   return (
-    <section className="priorityCard shellCard">
-      <div className="sectionHead">
+    <section className="dashboard-card priorities-card">
+      <div className="section-heading">
         <div>
           <h3>Top 3 AI Priorities</h3>
           <p>Recommended actions with the highest revenue impact.</p>
         </div>
 
-        <button type="button" className="textButton">
+        <button type="button" className="link-button">
           View All
         </button>
       </div>
 
-      <div className="priorityList">
-        {priorities.map((priority) => (
-          <article key={priority.rank}>
-            <span className={`rank rank${priority.rank}`}>
-              {priority.rank}
-            </span>
+      <div className="priority-list">
+        {PRIORITIES.map((priority) => {
+          const Icon = priority.icon;
 
-            <PriorityIcon priority={priority} />
+          return (
+            <article key={priority.rank}>
+              <span className={`priority-rank rank-${priority.rank}`}>
+                {priority.rank}
+              </span>
 
-            <div>
-              <strong>{priority.title}</strong>
-              <small>{priority.subtitle}</small>
-            </div>
+              <span
+                className={`priority-icon ${
+                  priority.className ?? ""
+                }`}
+              >
+                <Icon size={20} />
+              </span>
 
-            <div>
-              <span>{priority.impact}</span>
-              <strong>{priority.revenue}</strong>
-            </div>
+              <div className="priority-content">
+                <strong>{priority.title}</strong>
+                <small>{priority.description}</small>
+              </div>
 
-            <ChevronRight size={16} />
-          </article>
-        ))}
+              <div className="priority-impact">
+                <small>{priority.impact}</small>
+                <strong>{priority.value}</strong>
+              </div>
+
+              <ChevronRight size={17} />
+            </article>
+          );
+        })}
       </div>
 
-      <button type="button" className="recommendButton">
+      <button type="button" className="recommendations-button">
         Review Recommendations
         <ChevronRight size={16} />
       </button>
@@ -1083,17 +919,17 @@ function Priorities() {
 
 function RecentStrategies() {
   return (
-    <section className="strategiesCard shellCard">
-      <div className="sectionHead">
+    <section className="dashboard-card strategies-card">
+      <div className="section-heading">
         <h3>Recent Strategies</h3>
 
-        <button type="button" className="textButton">
+        <button type="button" className="link-button">
           View All
         </button>
       </div>
 
-      <div className="strategyTable">
-        <div className="strategyHeader">
+      <div className="strategy-table">
+        <div className="strategy-table-header">
           <span>Strategy</span>
           <span>Country</span>
           <span>Budget</span>
@@ -1103,27 +939,27 @@ function RecentStrategies() {
           <span />
         </div>
 
-        {strategies.map((strategy) => {
-          const PlatformIcon = strategy.Icon;
+        {STRATEGIES.map((strategy) => {
+          const Icon = strategy.icon;
 
           return (
             <article key={strategy.title}>
-              <div className="strategyName">
-                <b className={strategy.className}>
-                  <PlatformIcon size={15} />
-                </b>
+              <div className="strategy-name">
+                <span className={`strategy-platform ${strategy.className}`}>
+                  <Icon size={17} />
+                </span>
 
                 <strong>{strategy.title}</strong>
               </div>
 
-              <span className="strategyCountry">
-                <b>{strategy.flag}</b>
+              <span className="country-cell">
+                <i>{strategy.flag}</i>
                 {strategy.country}
               </span>
 
               <span>{strategy.budget}</span>
               <span>{strategy.goal}</span>
-              <i>{strategy.score}</i>
+              <strong className="strategy-score">{strategy.score}</strong>
               <span>{strategy.created}</span>
               <ChevronRight size={15} />
             </article>
@@ -1145,24 +981,25 @@ function Copilot() {
   ];
 
   return (
-    <section className="copilotCard shellCard">
-      <div className="sectionHead">
-        <div className="copilotTitle">
+    <section className="dashboard-card copilot-card">
+      <div className="section-heading">
+        <div className="copilot-heading">
           <span>
-            <Bot size={18} />
+            <Bot size={20} />
           </span>
 
           <h3>
-            AI Copilot <small>Beta</small>
+            AI Copilot
+            <small>Beta</small>
           </h3>
         </div>
 
-        <button type="button" className="textButton">
+        <button type="button" className="link-button">
           View All
         </button>
       </div>
 
-      <div className="chips">
+      <div className="copilot-questions">
         {questions.map((question) => (
           <button
             type="button"
@@ -1181,13 +1018,14 @@ function Copilot() {
         }}
       >
         <input
+          type="text"
           value={message}
           onChange={(event) => setMessage(event.target.value)}
           placeholder="Ask anything about your marketing..."
         />
 
-        <button type="submit">
-          <Send size={17} />
+        <button type="submit" aria-label="Send message">
+          <Send size={18} />
         </button>
       </form>
 
@@ -1200,76 +1038,16 @@ function Copilot() {
   );
 }
 
-function PlatformSelector({ value, onChange }) {
-  const [searchValue, setSearchValue] = useState("");
-
-  const filteredPlatforms = useMemo(() => {
-    const normalizedSearch = searchValue.trim().toLowerCase();
-
-    if (!normalizedSearch) {
-      return marketingPlatforms;
-    }
-
-    return marketingPlatforms.filter((platform) => {
-      return (
-        platform.name.toLowerCase().includes(normalizedSearch) ||
-        platform.category.toLowerCase().includes(normalizedSearch)
-      );
-    });
-  }, [searchValue]);
-
-  return (
-    <div className="platformSelector">
-      <div className="platformSearch">
-        <Search size={15} />
-
-        <input
-          value={searchValue}
-          onChange={(event) => setSearchValue(event.target.value)}
-          placeholder="Search platform..."
-        />
-      </div>
-
-      <div className="platformGrid">
-        {filteredPlatforms.map((platform) => {
-          const Icon = platform.Icon;
-          const selected = value === platform.name;
-
-          return (
-            <button
-              type="button"
-              key={platform.name}
-              className={`platformOption ${platform.className} ${
-                selected ? "selected" : ""
-              }`}
-              onClick={() => onChange(platform.name)}
-            >
-              <span>
-                <Icon size={18} />
-              </span>
-
-              <strong>{platform.name}</strong>
-              <small>{platform.category}</small>
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
 function NewStrategyModal({ open, onClose }) {
   const [countryCode, setCountryCode] = useState("US");
-  const [selectedPlatform, setSelectedPlatform] =
-    useState("Google Ads");
   const [product, setProduct] = useState("");
   const [budget, setBudget] = useState("");
   const [goal, setGoal] = useState("Sales");
 
   const selectedCountry = useMemo(
     () =>
-      countries.find((country) => country.code === countryCode) ??
-      countries[0],
+      COUNTRIES.find((country) => country.code === countryCode) ??
+      COUNTRIES[0],
     [countryCode],
   );
 
@@ -1279,44 +1057,41 @@ function NewStrategyModal({ open, onClose }) {
 
   return (
     <div
-      className="modalBackdrop"
+      className="modal-backdrop"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) {
           onClose();
         }
       }}
     >
-      <div className="modal modalLarge">
-        <div className="modalHead">
+      <div className="strategy-modal">
+        <div className="modal-heading">
           <div>
             <span>
-              <Sparkles size={18} />
+              <Sparkles size={20} />
             </span>
 
             <div>
               <h2>Create New Strategy</h2>
-              <p>
-                Select your platforms and generate a market-ready AI
-                advertising strategy.
-              </p>
+              <p>Generate a market-ready AI advertising strategy.</p>
             </div>
           </div>
 
           <button
             type="button"
-            className="iconButton"
+            className="icon-button"
             onClick={onClose}
             aria-label="Close modal"
           >
-            <X size={18} />
+            <X size={19} />
           </button>
         </div>
 
-        <div className="formGrid">
+        <div className="strategy-form">
           <label>
             <span>Product or Service</span>
-
             <input
+              type="text"
               value={product}
               onChange={(event) => setProduct(event.target.value)}
               placeholder="e.g. Premium skincare brand"
@@ -1330,7 +1105,7 @@ function NewStrategyModal({ open, onClose }) {
               value={countryCode}
               onChange={(event) => setCountryCode(event.target.value)}
             >
-              {countries.map((country) => (
+              {COUNTRIES.map((country) => (
                 <option key={country.code} value={country.code}>
                   {country.flag} {country.name} · {country.currency}
                 </option>
@@ -1341,8 +1116,8 @@ function NewStrategyModal({ open, onClose }) {
           <label>
             <span>Monthly Budget</span>
 
-            <div className="moneyInput">
-              <b>{selectedCountry.symbol}</b>
+            <div className="budget-input">
+              <strong>{selectedCountry.symbol}</strong>
 
               <input
                 type="number"
@@ -1363,29 +1138,13 @@ function NewStrategyModal({ open, onClose }) {
               <option>Sales</option>
               <option>Leads</option>
               <option>Awareness</option>
-              <option>App Installs</option>
               <option>Website Traffic</option>
+              <option>App Installs</option>
             </select>
           </label>
         </div>
 
-        <div className="modalSectionTitle">
-          <div>
-            <strong>Primary Marketing Platform</strong>
-            <small>
-              Choose the main channel for this advertising strategy.
-            </small>
-          </div>
-
-          <span>{selectedPlatform}</span>
-        </div>
-
-        <PlatformSelector
-          value={selectedPlatform}
-          onChange={setSelectedPlatform}
-        />
-
-        <div className="currencyPreview">
+        <div className="country-preview">
           <span>{selectedCountry.flag}</span>
 
           <div>
@@ -1394,38 +1153,14 @@ function NewStrategyModal({ open, onClose }) {
               {selectedCountry.currency} · {selectedCountry.symbol}
             </small>
           </div>
-
-          <div className="selectedPlatformPreview">
-            {(() => {
-              const platform =
-                marketingPlatforms.find(
-                  (item) => item.name === selectedPlatform,
-                ) ?? marketingPlatforms[0];
-
-              const Icon = platform.Icon;
-
-              return (
-                <>
-                  <span className={platform.className}>
-                    <Icon size={17} />
-                  </span>
-
-                  <div>
-                    <strong>{platform.name}</strong>
-                    <small>Primary advertising platform</small>
-                  </div>
-                </>
-              );
-            })()}
-          </div>
         </div>
 
         <button
           type="button"
-          className="generateButton"
+          className="generate-strategy-button"
           onClick={onClose}
         >
-          <Sparkles size={17} />
+          <Sparkles size={18} />
           Generate Strategy
         </button>
       </div>
@@ -1435,36 +1170,36 @@ function NewStrategyModal({ open, onClose }) {
 
 export default function HomePage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [strategyModalOpen, setStrategyModalOpen] = useState(false);
 
   return (
-    <div className="adlensApp">
+    <div className="adlens-app">
       <Sidebar
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
       />
 
-      <main className="mainContent">
+      <main className="main-content">
         <Topbar
-          onMenu={() => setSidebarOpen(true)}
-          onNewStrategy={() => setModalOpen(true)}
+          onOpenSidebar={() => setSidebarOpen(true)}
+          onOpenStrategy={() => setStrategyModalOpen(true)}
         />
 
         <div className="dashboard">
           <Hero />
 
-          <section className="metricsGrid">
-            {metrics.map((metric) => (
-              <MetricCard key={metric.label} metric={metric} />
+          <section className="metrics-grid">
+            {METRICS.map((metric) => (
+              <MetricCard metric={metric} key={metric.label} />
             ))}
           </section>
 
-          <section className="middleGrid">
+          <section className="dashboard-middle">
             <RevenueChart />
             <Priorities />
           </section>
 
-          <section className="bottomGrid">
+          <section className="dashboard-bottom">
             <RecentStrategies />
             <Copilot />
           </section>
@@ -1472,8 +1207,8 @@ export default function HomePage() {
       </main>
 
       <NewStrategyModal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
+        open={strategyModalOpen}
+        onClose={() => setStrategyModalOpen(false)}
       />
     </div>
   );
