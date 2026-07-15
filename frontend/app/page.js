@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+
 import {
   Activity,
   BarChart3,
@@ -34,6 +35,34 @@ import {
   Zap,
 } from "lucide-react";
 
+import {
+  SiAmazon,
+  SiFacebook,
+  SiGoogle,
+  SiGoogleads,
+  SiGoogleanalytics,
+  SiHubspot,
+  SiInstagram,
+  SiKlaviyo,
+  SiLinkedin,
+  SiMailchimp,
+  SiMeta,
+  SiMicrosoft,
+  SiPinterest,
+  SiReddit,
+  SiSalesforce,
+  SiShopify,
+  SiSnapchat,
+  SiSpotify,
+  SiSquarespace,
+  SiTiktok,
+  SiWix,
+  SiWoocommerce,
+  SiWordpress,
+  SiX,
+  SiYoutube,
+} from "react-icons/si";
+
 const navGroups = [
   {
     title: "Workspace",
@@ -58,6 +87,182 @@ const navGroups = [
       ["Creative Generator", WandSparkles],
       ["Budget Simulator", CircleDollarSign],
     ],
+  },
+];
+
+const connectedPlatforms = [
+  {
+    name: "Google Ads",
+    Icon: SiGoogleads,
+    className: "googleAds",
+  },
+  {
+    name: "Meta Ads",
+    Icon: SiMeta,
+    className: "metaAds",
+  },
+  {
+    name: "Shopify",
+    Icon: SiShopify,
+    className: "shopify",
+  },
+  {
+    name: "GA4",
+    Icon: SiGoogleanalytics,
+    className: "analytics",
+  },
+];
+
+const marketingPlatforms = [
+  {
+    name: "Google Ads",
+    Icon: SiGoogleads,
+    className: "googleAds",
+    category: "Advertising",
+  },
+  {
+    name: "Meta Ads",
+    Icon: SiMeta,
+    className: "metaAds",
+    category: "Advertising",
+  },
+  {
+    name: "Facebook",
+    Icon: SiFacebook,
+    className: "facebook",
+    category: "Social",
+  },
+  {
+    name: "Instagram",
+    Icon: SiInstagram,
+    className: "instagram",
+    category: "Social",
+  },
+  {
+    name: "TikTok Ads",
+    Icon: SiTiktok,
+    className: "tiktok",
+    category: "Advertising",
+  },
+  {
+    name: "YouTube Ads",
+    Icon: SiYoutube,
+    className: "youtube",
+    category: "Advertising",
+  },
+  {
+    name: "LinkedIn Ads",
+    Icon: SiLinkedin,
+    className: "linkedin",
+    category: "Advertising",
+  },
+  {
+    name: "Pinterest Ads",
+    Icon: SiPinterest,
+    className: "pinterest",
+    category: "Advertising",
+  },
+  {
+    name: "Snapchat Ads",
+    Icon: SiSnapchat,
+    className: "snapchat",
+    category: "Advertising",
+  },
+  {
+    name: "X Ads",
+    Icon: SiX,
+    className: "x",
+    category: "Advertising",
+  },
+  {
+    name: "Reddit Ads",
+    Icon: SiReddit,
+    className: "reddit",
+    category: "Advertising",
+  },
+  {
+    name: "Spotify Ads",
+    Icon: SiSpotify,
+    className: "spotify",
+    category: "Advertising",
+  },
+  {
+    name: "Microsoft Ads",
+    Icon: SiMicrosoft,
+    className: "microsoft",
+    category: "Advertising",
+  },
+  {
+    name: "Amazon Ads",
+    Icon: SiAmazon,
+    className: "amazon",
+    category: "Advertising",
+  },
+  {
+    name: "Google Analytics",
+    Icon: SiGoogleanalytics,
+    className: "analytics",
+    category: "Analytics",
+  },
+  {
+    name: "Google",
+    Icon: SiGoogle,
+    className: "google",
+    category: "Analytics",
+  },
+  {
+    name: "Shopify",
+    Icon: SiShopify,
+    className: "shopify",
+    category: "E-commerce",
+  },
+  {
+    name: "WooCommerce",
+    Icon: SiWoocommerce,
+    className: "woocommerce",
+    category: "E-commerce",
+  },
+  {
+    name: "WordPress",
+    Icon: SiWordpress,
+    className: "wordpress",
+    category: "E-commerce",
+  },
+  {
+    name: "Wix",
+    Icon: SiWix,
+    className: "wix",
+    category: "E-commerce",
+  },
+  {
+    name: "Squarespace",
+    Icon: SiSquarespace,
+    className: "squarespace",
+    category: "E-commerce",
+  },
+  {
+    name: "Mailchimp",
+    Icon: SiMailchimp,
+    className: "mailchimp",
+    category: "Email",
+  },
+  {
+    name: "Klaviyo",
+    Icon: SiKlaviyo,
+    className: "klaviyo",
+    category: "Email",
+  },
+  {
+    name: "HubSpot",
+    Icon: SiHubspot,
+    className: "hubspot",
+    category: "CRM",
+  },
+  {
+    name: "Salesforce",
+    Icon: SiSalesforce,
+    className: "salesforce",
+    category: "CRM",
   },
 ];
 
@@ -135,7 +340,7 @@ const priorities = [
     subtitle: "Potential revenue increase",
     impact: "High Impact",
     revenue: "+$1,890",
-    icon: Zap,
+    BrandIcon: SiTiktok,
   },
   {
     rank: 3,
@@ -143,13 +348,13 @@ const priorities = [
     subtitle: "Potential revenue increase",
     impact: "Medium Impact",
     revenue: "+$1,350",
-    icon: Search,
+    BrandIcon: SiGoogleads,
   },
 ];
 
 const strategies = [
   {
-    platform: "M",
+    Icon: SiMeta,
     className: "meta",
     title: "E-commerce Growth Strategy",
     flag: "🇺🇸",
@@ -160,7 +365,7 @@ const strategies = [
     created: "2 days ago",
   },
   {
-    platform: "T",
+    Icon: SiTiktok,
     className: "tiktok",
     title: "TikTok Scaling Strategy",
     flag: "🇬🇧",
@@ -171,7 +376,7 @@ const strategies = [
     created: "5 days ago",
   },
   {
-    platform: "G",
+    Icon: SiGoogleads,
     className: "google",
     title: "Google Ads Optimization",
     flag: "🇩🇪",
@@ -213,6 +418,27 @@ const countries = [
     symbol: "€",
   },
   {
+    code: "IT",
+    flag: "🇮🇹",
+    name: "Italy",
+    currency: "EUR",
+    symbol: "€",
+  },
+  {
+    code: "ES",
+    flag: "🇪🇸",
+    name: "Spain",
+    currency: "EUR",
+    symbol: "€",
+  },
+  {
+    code: "NL",
+    flag: "🇳🇱",
+    name: "Netherlands",
+    currency: "EUR",
+    symbol: "€",
+  },
+  {
     code: "TR",
     flag: "🇹🇷",
     name: "Türkiye",
@@ -227,6 +453,13 @@ const countries = [
     symbol: "د.إ",
   },
   {
+    code: "SA",
+    flag: "🇸🇦",
+    name: "Saudi Arabia",
+    currency: "SAR",
+    symbol: "﷼",
+  },
+  {
     code: "CA",
     flag: "🇨🇦",
     name: "Canada",
@@ -239,6 +472,41 @@ const countries = [
     name: "Australia",
     currency: "AUD",
     symbol: "A$",
+  },
+  {
+    code: "JP",
+    flag: "🇯🇵",
+    name: "Japan",
+    currency: "JPY",
+    symbol: "¥",
+  },
+  {
+    code: "KR",
+    flag: "🇰🇷",
+    name: "South Korea",
+    currency: "KRW",
+    symbol: "₩",
+  },
+  {
+    code: "IN",
+    flag: "🇮🇳",
+    name: "India",
+    currency: "INR",
+    symbol: "₹",
+  },
+  {
+    code: "BR",
+    flag: "🇧🇷",
+    name: "Brazil",
+    currency: "BRL",
+    symbol: "R$",
+  },
+  {
+    code: "MX",
+    flag: "🇲🇽",
+    name: "Mexico",
+    currency: "MXN",
+    symbol: "MX$",
   },
 ];
 
@@ -277,6 +545,7 @@ function Sidebar({ open, onClose }) {
             type="button"
             className="iconButton closeMenu"
             onClick={onClose}
+            aria-label="Close navigation"
           >
             <X size={17} />
           </button>
@@ -293,8 +562,10 @@ function Sidebar({ open, onClose }) {
                   className={`navItem ${active ? "active" : ""}`}
                   key={label}
                 >
-                  <Icon size={15} strokeWidth={1.9} />
+                  <Icon size={16} strokeWidth={1.9} />
+
                   <span>{label}</span>
+
                   {badge && <small>{badge}</small>}
                 </button>
               ))}
@@ -304,8 +575,9 @@ function Sidebar({ open, onClose }) {
           <div className="premiumCard">
             <div className="premiumHead">
               <span>
-                <Crown size={17} />
+                <Crown size={18} />
               </span>
+
               <strong>Go Premium</strong>
             </div>
 
@@ -316,7 +588,7 @@ function Sidebar({ open, onClose }) {
 
             <button type="button">
               Upgrade Plan
-              <ChevronRight size={14} />
+              <ChevronRight size={15} />
             </button>
           </div>
         </div>
@@ -329,7 +601,7 @@ function Sidebar({ open, onClose }) {
             <small>Premium Member</small>
           </div>
 
-          <ChevronDown size={14} />
+          <ChevronDown size={15} />
         </div>
       </aside>
     </>
@@ -344,27 +616,29 @@ function Topbar({ onMenu, onNewStrategy }) {
           type="button"
           className="iconButton menuButton"
           onClick={onMenu}
+          aria-label="Open navigation"
         >
-          <Menu size={19} />
+          <Menu size={20} />
         </button>
 
         <div>
           <h1>
             Good evening, Muhammed! <span>👋</span>
           </h1>
+
           <p>Your business is outperforming 87% of similar businesses.</p>
         </div>
       </div>
 
       <div className="topActions">
         <button type="button" className="ghostButton dateButton">
-          <CalendarDays size={14} />
+          <CalendarDays size={15} />
           May 6 – Jun 5, 2026
-          <ChevronDown size={12} />
+          <ChevronDown size={13} />
         </button>
 
         <button type="button" className="ghostButton exportButton">
-          <Download size={14} />
+          <Download size={15} />
           Export Report
         </button>
 
@@ -373,26 +647,28 @@ function Topbar({ onMenu, onNewStrategy }) {
           className="primaryButton"
           onClick={onNewStrategy}
         >
-          <Plus size={15} />
+          <Plus size={16} />
           New Strategy
         </button>
 
-        <button type="button" className="iconButton notify">
-          <Bell size={17} />
+        <button
+          type="button"
+          className="iconButton notify"
+          aria-label="Notifications"
+        >
+          <Bell size={18} />
           <i>3</i>
         </button>
 
         <div className="connections">
-          {[
-            ["G", "Google Ads"],
-            ["M", "Meta Ads"],
-            ["S", "Shopify"],
-            ["A", "GA4"],
-          ].map(([short, label]) => (
-            <div className="connection" key={label}>
-              <b>{short}</b>
+          {connectedPlatforms.map(({ name, Icon, className }) => (
+            <div className={`connection ${className}`} key={name}>
+              <b>
+                <Icon size={16} />
+              </b>
+
               <span>
-                {label}
+                {name}
                 <small>Connected</small>
               </span>
             </div>
@@ -401,7 +677,7 @@ function Topbar({ onMenu, onNewStrategy }) {
 
         <button type="button" className="profileButton">
           <div className="avatar">MA</div>
-          <ChevronDown size={13} />
+          <ChevronDown size={14} />
         </button>
       </div>
     </header>
@@ -416,7 +692,7 @@ function Hero() {
           <span>Since joining AdLens</span>
 
           <span>
-            <ShieldCheck size={12} />
+            <ShieldCheck size={13} />
             Business Health
             <b>87/100</b>
           </span>
@@ -431,7 +707,7 @@ function Hero() {
         <p>Since you joined on May 6, 2026</p>
 
         <div className="confidence">
-          <Lightbulb size={13} />
+          <Lightbulb size={14} />
           AI Confidence Average: 94%
         </div>
 
@@ -441,7 +717,13 @@ function Hero() {
           preserveAspectRatio="none"
         >
           <defs>
-            <linearGradient id="waveStroke" x1="0" y1="0" x2="1" y2="0">
+            <linearGradient
+              id="waveStroke"
+              x1="0"
+              y1="0"
+              x2="1"
+              y2="0"
+            >
               <stop offset="0" stopColor="#6d28d9" stopOpacity="0" />
               <stop offset=".48" stopColor="#c266ff" />
               <stop offset="1" stopColor="#7c3aed" stopOpacity=".15" />
@@ -455,7 +737,9 @@ function Hero() {
           </defs>
 
           <path d="M0 130 C110 128 155 76 252 94 C327 108 362 42 448 76 C502 98 525 118 560 110" />
+
           <path d="M0 142 C95 134 162 90 245 100 C330 112 378 55 455 86 C500 104 532 112 560 108" />
+
           <path d="M0 150 C108 140 166 110 250 108 C330 107 394 76 467 98 C507 110 538 112 560 109" />
 
           <circle cx="253" cy="94" r="22" fill="url(#waveGlow)" />
@@ -496,6 +780,7 @@ function Hero() {
             <span>
               <i />
             </span>
+
             <b>49%</b>
           </div>
 
@@ -507,7 +792,8 @@ function Hero() {
             <span>
               Opportunity Score <i>i</i>
             </span>
-            <Lightbulb size={14} />
+
+            <Lightbulb size={15} />
           </div>
 
           <div className="oppValues">
@@ -538,8 +824,9 @@ function MetricCard({ metric }) {
     <article className={`metricCard shellCard ${metric.tone}`}>
       <div className="metricTop">
         <span className="metricIcon">
-          <Icon size={17} />
+          <Icon size={18} />
         </span>
+
         <span>{metric.label}</span>
       </div>
 
@@ -549,6 +836,7 @@ function MetricCard({ metric }) {
         <b className={metric.negative ? "negative" : ""}>
           {metric.change}
         </b>
+
         <small>vs last 30 days</small>
       </p>
 
@@ -613,10 +901,12 @@ function RevenueChart() {
               <b className="dash" />
               Without AdLens
             </span>
+
             <span>
               <b className="dot purpleDot" />
               With AdLens
             </span>
+
             <span>
               <b className="dot greenDot" />
               AdLens-attributed uplift
@@ -626,7 +916,7 @@ function RevenueChart() {
 
         <button type="button">
           Last 30 days
-          <ChevronDown size={12} />
+          <ChevronDown size={13} />
         </button>
       </div>
 
@@ -717,9 +1007,31 @@ function RevenueChart() {
 
       <button type="button" className="textButton">
         View Detailed Analytics
-        <ChevronRight size={13} />
+        <ChevronRight size={14} />
       </button>
     </section>
+  );
+}
+
+function PriorityIcon({ priority }) {
+  if (priority.BrandIcon) {
+    const BrandIcon = priority.BrandIcon;
+
+    return (
+      <span
+        className={`priorityIcon brandPriority brandPriority${priority.rank}`}
+      >
+        <BrandIcon size={18} />
+      </span>
+    );
+  }
+
+  const Icon = priority.icon;
+
+  return (
+    <span className="priorityIcon">
+      <Icon size={18} />
+    </span>
   );
 }
 
@@ -738,38 +1050,32 @@ function Priorities() {
       </div>
 
       <div className="priorityList">
-        {priorities.map((priority) => {
-          const Icon = priority.icon;
+        {priorities.map((priority) => (
+          <article key={priority.rank}>
+            <span className={`rank rank${priority.rank}`}>
+              {priority.rank}
+            </span>
 
-          return (
-            <article key={priority.rank}>
-              <span className={`rank rank${priority.rank}`}>
-                {priority.rank}
-              </span>
+            <PriorityIcon priority={priority} />
 
-              <span className="priorityIcon">
-                <Icon size={17} />
-              </span>
+            <div>
+              <strong>{priority.title}</strong>
+              <small>{priority.subtitle}</small>
+            </div>
 
-              <div>
-                <strong>{priority.title}</strong>
-                <small>{priority.subtitle}</small>
-              </div>
+            <div>
+              <span>{priority.impact}</span>
+              <strong>{priority.revenue}</strong>
+            </div>
 
-              <div>
-                <span>{priority.impact}</span>
-                <strong>{priority.revenue}</strong>
-              </div>
-
-              <ChevronRight size={15} />
-            </article>
-          );
-        })}
+            <ChevronRight size={16} />
+          </article>
+        ))}
       </div>
 
       <button type="button" className="recommendButton">
         Review Recommendations
-        <ChevronRight size={15} />
+        <ChevronRight size={16} />
       </button>
     </section>
   );
@@ -797,24 +1103,32 @@ function RecentStrategies() {
           <span />
         </div>
 
-        {strategies.map((strategy) => (
-          <article key={strategy.title}>
-            <div className="strategyName">
-              <b className={strategy.className}>{strategy.platform}</b>
-              <strong>{strategy.title}</strong>
-            </div>
+        {strategies.map((strategy) => {
+          const PlatformIcon = strategy.Icon;
 
-            <span>
-              {strategy.flag} {strategy.country}
-            </span>
+          return (
+            <article key={strategy.title}>
+              <div className="strategyName">
+                <b className={strategy.className}>
+                  <PlatformIcon size={15} />
+                </b>
 
-            <span>{strategy.budget}</span>
-            <span>{strategy.goal}</span>
-            <i>{strategy.score}</i>
-            <span>{strategy.created}</span>
-            <ChevronRight size={14} />
-          </article>
-        ))}
+                <strong>{strategy.title}</strong>
+              </div>
+
+              <span className="strategyCountry">
+                <b>{strategy.flag}</b>
+                {strategy.country}
+              </span>
+
+              <span>{strategy.budget}</span>
+              <span>{strategy.goal}</span>
+              <i>{strategy.score}</i>
+              <span>{strategy.created}</span>
+              <ChevronRight size={15} />
+            </article>
+          );
+        })}
       </div>
     </section>
   );
@@ -835,7 +1149,7 @@ function Copilot() {
       <div className="sectionHead">
         <div className="copilotTitle">
           <span>
-            <Bot size={17} />
+            <Bot size={18} />
           </span>
 
           <h3>
@@ -873,7 +1187,7 @@ function Copilot() {
         />
 
         <button type="submit">
-          <Send size={16} />
+          <Send size={17} />
         </button>
       </form>
 
@@ -886,8 +1200,68 @@ function Copilot() {
   );
 }
 
+function PlatformSelector({ value, onChange }) {
+  const [searchValue, setSearchValue] = useState("");
+
+  const filteredPlatforms = useMemo(() => {
+    const normalizedSearch = searchValue.trim().toLowerCase();
+
+    if (!normalizedSearch) {
+      return marketingPlatforms;
+    }
+
+    return marketingPlatforms.filter((platform) => {
+      return (
+        platform.name.toLowerCase().includes(normalizedSearch) ||
+        platform.category.toLowerCase().includes(normalizedSearch)
+      );
+    });
+  }, [searchValue]);
+
+  return (
+    <div className="platformSelector">
+      <div className="platformSearch">
+        <Search size={15} />
+
+        <input
+          value={searchValue}
+          onChange={(event) => setSearchValue(event.target.value)}
+          placeholder="Search platform..."
+        />
+      </div>
+
+      <div className="platformGrid">
+        {filteredPlatforms.map((platform) => {
+          const Icon = platform.Icon;
+          const selected = value === platform.name;
+
+          return (
+            <button
+              type="button"
+              key={platform.name}
+              className={`platformOption ${platform.className} ${
+                selected ? "selected" : ""
+              }`}
+              onClick={() => onChange(platform.name)}
+            >
+              <span>
+                <Icon size={18} />
+              </span>
+
+              <strong>{platform.name}</strong>
+              <small>{platform.category}</small>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function NewStrategyModal({ open, onClose }) {
   const [countryCode, setCountryCode] = useState("US");
+  const [selectedPlatform, setSelectedPlatform] =
+    useState("Google Ads");
   const [product, setProduct] = useState("");
   const [budget, setBudget] = useState("");
   const [goal, setGoal] = useState("Sales");
@@ -912,20 +1286,28 @@ function NewStrategyModal({ open, onClose }) {
         }
       }}
     >
-      <div className="modal">
+      <div className="modal modalLarge">
         <div className="modalHead">
           <div>
             <span>
-              <Sparkles size={17} />
+              <Sparkles size={18} />
             </span>
 
             <div>
               <h2>Create New Strategy</h2>
-              <p>Generate a market-ready AI advertising strategy.</p>
+              <p>
+                Select your platforms and generate a market-ready AI
+                advertising strategy.
+              </p>
             </div>
           </div>
 
-          <button type="button" className="iconButton" onClick={onClose}>
+          <button
+            type="button"
+            className="iconButton"
+            onClick={onClose}
+            aria-label="Close modal"
+          >
             <X size={18} />
           </button>
         </div>
@@ -933,6 +1315,7 @@ function NewStrategyModal({ open, onClose }) {
         <div className="formGrid">
           <label>
             <span>Product or Service</span>
+
             <input
               value={product}
               onChange={(event) => setProduct(event.target.value)}
@@ -981,9 +1364,26 @@ function NewStrategyModal({ open, onClose }) {
               <option>Leads</option>
               <option>Awareness</option>
               <option>App Installs</option>
+              <option>Website Traffic</option>
             </select>
           </label>
         </div>
+
+        <div className="modalSectionTitle">
+          <div>
+            <strong>Primary Marketing Platform</strong>
+            <small>
+              Choose the main channel for this advertising strategy.
+            </small>
+          </div>
+
+          <span>{selectedPlatform}</span>
+        </div>
+
+        <PlatformSelector
+          value={selectedPlatform}
+          onChange={setSelectedPlatform}
+        />
 
         <div className="currencyPreview">
           <span>{selectedCountry.flag}</span>
@@ -994,10 +1394,38 @@ function NewStrategyModal({ open, onClose }) {
               {selectedCountry.currency} · {selectedCountry.symbol}
             </small>
           </div>
+
+          <div className="selectedPlatformPreview">
+            {(() => {
+              const platform =
+                marketingPlatforms.find(
+                  (item) => item.name === selectedPlatform,
+                ) ?? marketingPlatforms[0];
+
+              const Icon = platform.Icon;
+
+              return (
+                <>
+                  <span className={platform.className}>
+                    <Icon size={17} />
+                  </span>
+
+                  <div>
+                    <strong>{platform.name}</strong>
+                    <small>Primary advertising platform</small>
+                  </div>
+                </>
+              );
+            })()}
+          </div>
         </div>
 
-        <button type="button" className="generateButton" onClick={onClose}>
-          <Sparkles size={16} />
+        <button
+          type="button"
+          className="generateButton"
+          onClick={onClose}
+        >
+          <Sparkles size={17} />
           Generate Strategy
         </button>
       </div>
