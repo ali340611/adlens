@@ -508,35 +508,56 @@ function HeroWave() {
   return (
     <svg
       className="hero-wave"
-      viewBox="0 0 620 180"
+      viewBox="0 0 620 200"
       preserveAspectRatio="none"
       aria-hidden="true"
     >
       <defs>
-        <linearGradient id="heroLine" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#5b21b6" stopOpacity="0" />
-          <stop offset="35%" stopColor="#8b5cf6" stopOpacity="0.8" />
-          <stop offset="54%" stopColor="#d26cff" />
-          <stop offset="100%" stopColor="#6d28d9" stopOpacity="0" />
+        <linearGradient id="heroLineA" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#6d28d9" stopOpacity="0" />
+          <stop offset="38%" stopColor="#9d5cff" stopOpacity="0.85" />
+          <stop offset="58%" stopColor="#ecd6ff" />
+          <stop offset="100%" stopColor="#5b21b6" stopOpacity="0" />
         </linearGradient>
 
-        <radialGradient id="heroLight">
+        <linearGradient id="heroLineB" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#4c1d95" stopOpacity="0" />
+          <stop offset="45%" stopColor="#a855f7" stopOpacity="0.7" />
+          <stop offset="100%" stopColor="#312e81" stopOpacity="0" />
+        </linearGradient>
+
+        <radialGradient id="heroLight" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor="#ffffff" />
-          <stop offset="18%" stopColor="#f0d6ff" />
-          <stop offset="45%" stopColor="#a855f7" stopOpacity="0.75" />
+          <stop offset="16%" stopColor="#f2ddff" stopOpacity="0.95" />
+          <stop offset="42%" stopColor="#b579ff" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#7c3aed" stopOpacity="0" />
+        </radialGradient>
+
+        <radialGradient id="heroHaze" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#7c3aed" stopOpacity="0.16" />
           <stop offset="100%" stopColor="#7c3aed" stopOpacity="0" />
         </radialGradient>
       </defs>
 
-      <path d="M-20 142 C95 145 146 81 248 99 C346 117 380 44 474 79 C535 102 567 121 650 105" />
-      <path d="M-20 151 C95 143 158 98 251 106 C351 115 393 61 481 89 C536 107 577 117 650 108" />
-      <path d="M-20 159 C92 151 168 121 258 115 C355 108 418 82 495 102 C551 117 590 116 650 108" />
-      <path d="M-20 167 C105 160 177 140 277 124 C374 108 441 102 512 112 C565 120 605 116 650 110" />
+      <ellipse cx="230" cy="120" rx="230" ry="120" fill="url(#heroHaze)" />
 
-      <circle cx="255" cy="99" r="30" fill="url(#heroLight)" />
-      <circle cx="255" cy="99" r="4" fill="#ffffff" />
-      <circle cx="474" cy="79" r="3" fill="#e9d5ff" />
-      <circle cx="390" cy="67" r="2" fill="#c084fc" />
+      <path
+        className="hero-wave-line hero-wave-line-a"
+        d="M-30 168 C60 176 108 118 176 108 C246 98 258 150 330 132 C398 115 402 60 470 74 C530 87 560 132 650 96"
+      />
+      <path
+        className="hero-wave-line hero-wave-line-b"
+        d="M-30 128 C70 108 120 158 200 140 C270 124 300 76 366 96 C424 114 452 158 520 128 C570 106 600 118 650 100"
+      />
+      <path
+        className="hero-wave-line hero-wave-line-c"
+        d="M-30 152 C80 140 150 180 224 158 C290 138 316 96 384 112 C446 126 470 90 540 108 C580 118 610 128 650 118"
+      />
+
+      <circle cx="245" cy="106" r="34" fill="url(#heroLight)" />
+      <circle cx="245" cy="106" r="4.2" fill="#ffffff" />
+      <circle cx="470" cy="74" r="2.6" fill="#e9d5ff" opacity="0.85" />
+      <circle cx="366" cy="96" r="2" fill="#c084fc" opacity="0.7" />
     </svg>
   );
 }
@@ -671,7 +692,7 @@ function MetricCard({ metric }) {
     <article className={`metric-card metric-${metric.tone}`}>
       <div className="metric-title">
         <span>
-          <Icon size={20} />
+          <Icon size={18} />
         </span>
         <small>{metric.label}</small>
       </div>
@@ -816,7 +837,7 @@ function RevenueChart() {
                 className="chart-purple-point"
                 cx={x}
                 cy={y}
-                r="3.7"
+                r="3.4"
               />
             ))}
 
@@ -826,7 +847,7 @@ function RevenueChart() {
                 className="chart-green-point"
                 cx={x}
                 cy={y}
-                r="3.7"
+                r="3.4"
               />
             ))}
           </svg>
@@ -890,7 +911,7 @@ function Priorities() {
                   priority.className ?? ""
                 }`}
               >
-                <Icon size={20} />
+                <Icon size={19} />
               </span>
 
               <div className="priority-content">
@@ -946,7 +967,7 @@ function RecentStrategies() {
             <article key={strategy.title}>
               <div className="strategy-name">
                 <span className={`strategy-platform ${strategy.className}`}>
-                  <Icon size={17} />
+                  <Icon size={16} />
                 </span>
 
                 <strong>{strategy.title}</strong>
@@ -985,7 +1006,7 @@ function Copilot() {
       <div className="section-heading">
         <div className="copilot-heading">
           <span>
-            <Bot size={20} />
+            <Bot size={19} />
           </span>
 
           <h3>
@@ -1025,7 +1046,7 @@ function Copilot() {
         />
 
         <button type="submit" aria-label="Send message">
-          <Send size={18} />
+          <Send size={17} />
         </button>
       </form>
 
